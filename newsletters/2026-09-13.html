@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>THIS WEEK AT FLYOVER HEAT</title>
+  <meta name="description" content="THIS WEEK AT FLYOVER HEAT — Drop Zone empirical trading card market intelligence and pricing guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+/* Drop Zone / Flyover Heat public edition.
+   Palette and type follow webapp/static/arena.css -- the brand authority
+   (claude/aesthetic.md: violet accent, Bricolage display, Hanken body). A
+   reader who clicks through from eBay should land somewhere that looks like
+   the same company, not a default markdown dump. */
+:root {
+  --page-bg: #E7E9F3; --surface: #FFFFFF;
+  --text: #262A40; --text-strong: #0E1020; --text-muted: #4B5170;
+  --accent: #4133E0; --accent-deep: #3527C4; --accent-sub: #EEEDFE;
+  --border: #D8DBEA; --border-soft: #E6E8F2;
+  --hot: #98240F; --positive: #07583A;
+  --font-disp: 'Bricolage Grotesque', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0E1020; --surface: #191C30;
+    --text: #D6D9EA; --text-strong: #FFFFFF; --text-muted: #9AA0BE;
+    --accent: #8B7FF5; --accent-deep: #A79DF8; --accent-sub: #232640;
+    --border: #2E3252; --border-soft: #262A45;
+    --hot: #FF8A6B; --positive: #5FD3A3;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  max-width: 760px; margin: 0 auto; padding: 0 22px 64px;
+  line-height: 1.65; font-size: 16.5px;
+  color: var(--text); background: var(--page-bg);
+}
+
+/* ---- masthead ---- */
+.masthead {
+  margin: 0 -22px 34px; padding: 34px 22px 26px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff;
+}
+.masthead__inner { max-width: 760px; margin: 0 auto; }
+.masthead__kicker {
+  font: 600 11px var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  opacity: .78; margin: 0 0 8px;
+}
+.masthead__title {
+  font-family: var(--font-disp); font-size: clamp(30px, 6vw, 44px);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.02em; margin: 0;
+  color: #fff;
+}
+.masthead__date { margin: 12px 0 0; font-size: 14px; opacity: .85; }
+.masthead a { color: #fff; }
+
+/* ---- type ---- */
+h1 {
+  font-family: var(--font-disp); font-size: 30px; font-weight: 800;
+  line-height: 1.18; letter-spacing: -.015em; margin: 34px 0 14px;
+  color: var(--text-strong);
+}
+h2 {
+  font-family: var(--font-disp); font-size: 21px; font-weight: 700;
+  letter-spacing: -.01em; margin: 40px 0 14px; padding-bottom: 9px;
+  color: var(--text-strong); border-bottom: 2px solid var(--accent-sub);
+}
+h3 { font-family: var(--font-disp); font-size: 16.5px; font-weight: 700;
+     margin: 24px 0 8px; color: var(--text-strong); }
+p { margin: 14px 0; }
+strong { color: var(--text-strong); font-weight: 700; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 36px 0; }
+blockquote {
+  margin: 22px 0; padding: 16px 20px; background: var(--surface);
+  border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+  color: var(--text); font-size: 16px;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 22px; margin: 14px 0; }
+li { margin: 8px 0; }
+li::marker { color: var(--accent); }
+code { font: 500 13.5px ui-monospace, SFMono-Regular, Menlo, monospace;
+       background: var(--accent-sub); padding: 2px 6px; border-radius: 5px; }
+img { max-width: 100%; height: auto; border-radius: 10px; }
+
+a { color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+/* ---- tables ---- */
+.table-wrap { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+th, td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+th {
+  background: var(--accent-sub); font: 700 11.5px var(--font-body);
+  letter-spacing: .07em; text-transform: uppercase; color: var(--accent-deep);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-sub); }
+
+/* ---- bits ---- */
+.meta { color: var(--text-muted); font-size: 13.5px; margin: 0 0 22px; }
+.guide-nav {
+  font-size: 13.5px; font-weight: 600; margin-bottom: 26px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--border); color: var(--text-muted);
+}
+.guide-nav a { color: var(--accent); }
+.footer {
+  margin-top: 52px; padding: 22px 24px; font-size: 14px;
+  color: var(--text-muted); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px; line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; padding: 0 16px 48px; }
+  .masthead { margin: 0 -16px 26px; padding: 26px 16px 22px; }
+  th, td { padding: 9px 11px; }
+}
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="masthead__kicker">Weekly Edition</p>
+      <h1 class="masthead__title">Flyover Heat Weekly</h1>
+      <p class="masthead__date">September 13, 2026</p>
+    </div>
+  </header>
+  <h1>THIS WEEK AT FLYOVER HEAT</h1>
+<h2>Sep 06 – Sep 13, 2026</h2>
+
+<p>Hi — my name is Eric, otherwise known as <strong>TigerHawk-515</strong>, owner of this little card shop called Flyover Heat.</p>
+
+<p>For those who haven't read my About section: I got back into the hobby about a year ago and found it tough to manage a family and an inventory at the same time. So I started building a spreadsheet to give some time back to my wife and kids. That turned into a little A.I. automation, and from there into full automation, built on eBay's own developer platform and through their compliance review.</p>
+
+<p>It did not come without several self-inflicted injuries along the way. But through those lessons I've built something for the hobby, and for you — meant to protect your investment and run it efficiently. I can't guarantee you'll make money (that tends to be a bonus). What I can promise is a return more valuable than gold: <strong>your time.</strong> Time with friends, family, your customers, your business. Yourself.</p>
+
+<p>I'm giving you all first crack at it, because I value your business and your opinion.</p>
+
+<p>And you should know this: if you've done business with me, it's likely that most of what you saw was run by <strong><a href="https://dropzonecards.com">DropZoneCards.com</a></strong> A.I. — every reprice, every promotion, every offer sent, declined or accepted, and this newsletter you're reading. What was never automated is the part that matters: if you and I have talked, that was me, and I still answer every message personally and immediately.</p>
+
+<p>I know that might be a turn-off for some, and others might love it. Either way I want to thank you personally for your business and for taking the time to look at this.</p>
+
+<p>I'm excited about what it could do to make this hobby a little more manageable — maybe a lot. My hope is to keep doing business with you, so get back to me.</p>
+
+<p>On <strong>your</strong> time, of course.</p>
+
+<p>— Eric</p>
+
+<hr style='border: none; border-top: 1px solid #e2e8f0; margin: 32px 0;'>
+
+<p><em>Sports card market intelligence from the Flyover Heat store — hot players, market-moving injuries, accolades, trades, and what's selling.</em></p>
+
+<p><em>Every card you see here was photographed, identified, priced against live market comps and listed by <strong><a href="https://dropzonecards.com">Drop Zone Cards</a></strong>, our own card automation — the same system reads the week's sports news to build this newsletter. If you sell cards yourself and the listing grind is what's stopping you scaling, that's exactly what we built it for.</em></p>
+
+<h2>🗞️ THE HOBBY DESK — WHAT'S MOVING THE MARKET</h2>
+<p>*The week across the hobby. Sourced from public reporting — every item links to verify.*</p>
+
+<ul>
+  <li>PSA opens a new Standard tier on Sept 14: $59.99 a card, 90 to 100 business days, $1,000 max declared value — and it queues behind the Value and Bulk orders already in the building. The Value levels most collectors actually used, $24.99 Bulk through $64.99 Max, stay paused until the backlog falls from 9.9 million cards to 5 million, so the cheapest door open right now costs more than three of the four tiers it isn't replacing. Express also went $149 to $199. Before you box up a stack: at $59.99 and a four-to-five-month wait, the fee and the calendar are most of the argument on anything but a genuinely valuable card. — per <a href="https://www.si.com/collectibles/psa-reorganizes-services-levels-opens-new-tier-european-facility">Sports Illustrated</a></li>
+</ul>
+
+<h2>🔥 HOT MOVES — PLAYERS WE HAVE</h2>
+<ul>
+  <li><strong>Living Legends</strong> — on a hot streak. We have 1 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Living+Legends">$6.31 total</a>.</li>
+  <li><strong>Lamine Yamal</strong> — on a hot streak. We have 6 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Lamine+Yamal">$66.70 total</a>.</li>
+  <li><strong>Giuliano Simeone</strong> — on a hot streak. We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Giuliano+Simeone">$38.81 total</a>.</li>
+  <li><strong>Xtra Time</strong> — on a hot streak. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Xtra+Time">$15.95 total</a>.</li>
+  <li><strong>Caleb Williams</strong> — on a hot streak. We have 6 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Caleb+Williams">$86.43 total</a>.</li>
+  <li><strong>Jalen Hurts</strong> — on a hot streak. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Jalen+Hurts">$28.88 total</a>.</li>
+  <li><strong>Carter Bryant</strong> — on a hot streak. We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Carter+Bryant">$20.25 total</a>.</li>
+  <li><strong>Cristiano Ronaldo</strong> — on a hot streak. We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Cristiano+Ronaldo">$41.48 total</a>.</li>
+  <li><strong>Pau Cubarsi</strong> — on a hot streak. We have 1 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Pau+Cubarsi">$19.99 total</a>.</li>
+  <li><strong>Kristijan Kahlina</strong> — on a hot streak. We have 1 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Kristijan+Kahlina">$8.11 total</a>.</li>
+</ul>
+
+<h2>🎯 HEAT SEEKING — COMING SOON TO FLYOVER HEAT</h2>
+<p>These players are heating up across the leagues we cover. We're working to acquire singles — watch the store.</p>
+
+<ul>
+  <li><strong>James Harden</strong> (NBA) — agrees to 3-year, $97M deal to remain with Cavaliers - ESPN</li>
+  <li><strong>Andre Swift</strong> (NFL) — Bears, D’Andre Swift agree to three-year contract extension - NBC Sports</li>
+  <li><strong>Baker Mayfield</strong> (NFL) — Buccaneers agree to terms on 3-year/$165M contract extension 'Up To The Minute' - Yahoo Sports</li>
+  <li><strong>John Peck</strong> (MLB) — Selected by Detroit Tigers</li>
+  <li><strong>Klay Thompson</strong> (NBA) — to sign 2-year deal with Heat after Mavs buyout - ESPN</li>
+</ul>
+
+<h2>💎 VALUE PICK OF THE WEEK</h2>
+<p><strong>2025 Panini WNBA Select Saniya Rivers RC Prizm Courtside #224 Connecticut Sun</strong> — <strong>$13.31</strong> (16 watchers)</p>
+
+<p>16 buyers already watching this one. Rookie card + premium parallel, priced under most comparable comps in the active market.</p>
+
+<h2>🔦 SPOTLIGHT</h2>
+<p><strong>James Harden</strong> (NBA)</p>
+
+<p><em>This week:</em> agrees to 3-year, $97M deal to remain with Cavaliers - ESPN.</p>
+
+<h2>🔥 ITEMS ON FIRE — NEW THIS WEEK</h2>
+<ul>
+  <li>2024 Panini Prizm Draft Picks J.J. McCarthy RC #II-JJ Instant Impact Red — $16.31</li>
+  <li>2024-25 Panini Mosaic - Jarrett Allen #161 Blue Seismic Mosaic Prizm /149 — $14.12</li>
+  <li>2024 Panini Prizm Squishmallows Series 1 Sheldon #77 Holo /199 Base Set — $13.90</li>
+  <li>2025 Bowman Chrome University Kon Knueppel 1st Bowman Rookie RC #48 Duke — $12.28</li>
+  <li>2025 Donruss Optic Bubba Chandler Blue Velocity Prizm Rated Prospect RC #193 — $10.15</li>
+</ul>
+
+<h2>👀 BUYERS ARE WATCHING</h2>
+<ul>
+  <li>2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare! — $164.99 (14 watchers)</li>
+  <li>2026 Topps Chrome Marvel Classic Comic Covers Spider Man Refractor #CC — $72.00 (10 watchers)</li>
+  <li>2026 Bowman Baseball Colt Emerson Gold /50 Paper Auto #BPA-CE Mariners — $250.00 (9 watchers)</li>
+  <li>1997 Skybox Marvel Metal Universe John Elway #8 — $109.99 (9 watchers)</li>
+</ul>
+
+<h2>🏷️ SOLD THIS WEEK</h2>
+<ul>
+  <li>1997 Fleer Metal Shaquille O'Neal #188 Lakers NBA Basketball Los Angeles Lakers — <strong>$22.92</strong></li>
+  <li>2024 Panini Select WWE Icons Roddy Piper Prizm #23 Red Prizm /99 Wrestling — <strong>$18.31</strong></li>
+  <li>1998 Fleer Harball Galaxy Cal Ripken Jr. #213 Baltimore Orioles Baseball MLB — <strong>$12.50</strong></li>
+  <li>2025-26 Panini Donruss Unleashed Carter Bryant RC #13 Purple Foil /299 — <strong>$12.31</strong></li>
+</ul>
+
+<h2>📅 COMING UP</h2>
+<ul>
+  <li><strong>2026-09-13</strong> (<strong>TONIGHT</strong>): Pokemon TCG Stellar Crown Expansion Release</li>
+  <li><strong>2026-09-18</strong> (5d): Upper Deck Platinum DC entertainment chrome release</li>
+  <li><strong>2026-09-23</strong> (10d): National Treasures Road to FIFA World Cup premium release</li>
+  <li><strong>2026-09-24</strong> (11d): 2026 WNBA regular season final day</li>
+  <li><strong>2026-09-26</strong> (13d): 2026 Topps Five Star Baseball release</li>
+  <li><strong>2026-09-27</strong> (14d): 2026 WNBA Playoffs First Round begins</li>
+</ul>
+
+<h2>🎁 BUNDLE & SAVE</h2>
+<p>Buy more, save more: 5% off 2+ · 10% off 3+ · 15% off 4+.</p>
+
+<p>🔗 <a href="https://www.ebay.com/usr/tigerhawk-515">Browse the store</a></p>
+  <div class="footer">
+    You're reading the full edition of the Flyover Heat Weekly.
+    <br>Follow the store on eBay to receive the next one:
+    <a href="https://www.ebay.com/usr/tigerhawk-515">www.ebay.com/usr/tigerhawk-515</a><br>Or shop the same inventory direct: <a href="https://flyoverheat.myshopify.com">flyoverheat.myshopify.com</a>
+  </div>
+</body>
+</html>
