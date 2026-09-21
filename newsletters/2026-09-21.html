@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>THE FLYOVER HEAT WEEKLY</title>
+  <meta name="description" content="THE FLYOVER HEAT WEEKLY — Drop Zone empirical trading card market intelligence and pricing guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+/* Drop Zone / Flyover Heat public edition.
+   Palette and type follow webapp/static/arena.css -- the brand authority
+   (claude/aesthetic.md: violet accent, Bricolage display, Hanken body). A
+   reader who clicks through from eBay should land somewhere that looks like
+   the same company, not a default markdown dump. */
+:root {
+  --page-bg: #E7E9F3; --surface: #FFFFFF;
+  --text: #262A40; --text-strong: #0E1020; --text-muted: #4B5170;
+  --accent: #4133E0; --accent-deep: #3527C4; --accent-sub: #EEEDFE;
+  --border: #D8DBEA; --border-soft: #E6E8F2;
+  --hot: #98240F; --positive: #07583A;
+  --font-disp: 'Bricolage Grotesque', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0E1020; --surface: #191C30;
+    --text: #D6D9EA; --text-strong: #FFFFFF; --text-muted: #9AA0BE;
+    --accent: #8B7FF5; --accent-deep: #A79DF8; --accent-sub: #232640;
+    --border: #2E3252; --border-soft: #262A45;
+    --hot: #FF8A6B; --positive: #5FD3A3;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  max-width: 760px; margin: 0 auto; padding: 0 22px 64px;
+  line-height: 1.65; font-size: 16.5px;
+  color: var(--text); background: var(--page-bg);
+}
+
+/* ---- masthead ---- */
+.masthead {
+  margin: 0 -22px 34px; padding: 34px 22px 26px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff;
+}
+.masthead__inner { max-width: 760px; margin: 0 auto; }
+.masthead__kicker {
+  font: 600 11px var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  opacity: .78; margin: 0 0 8px;
+}
+.masthead__title {
+  font-family: var(--font-disp); font-size: clamp(30px, 6vw, 44px);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.02em; margin: 0;
+  color: #fff;
+}
+.masthead__date { margin: 12px 0 0; font-size: 14px; opacity: .85; }
+.masthead a { color: #fff; }
+
+/* ---- type ---- */
+h1 {
+  font-family: var(--font-disp); font-size: 30px; font-weight: 800;
+  line-height: 1.18; letter-spacing: -.015em; margin: 34px 0 14px;
+  color: var(--text-strong);
+}
+h2 {
+  font-family: var(--font-disp); font-size: 21px; font-weight: 700;
+  letter-spacing: -.01em; margin: 40px 0 14px; padding-bottom: 9px;
+  color: var(--text-strong); border-bottom: 2px solid var(--accent-sub);
+}
+h3 { font-family: var(--font-disp); font-size: 16.5px; font-weight: 700;
+     margin: 24px 0 8px; color: var(--text-strong); }
+p { margin: 14px 0; }
+strong { color: var(--text-strong); font-weight: 700; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 36px 0; }
+blockquote {
+  margin: 22px 0; padding: 16px 20px; background: var(--surface);
+  border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+  color: var(--text); font-size: 16px;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 22px; margin: 14px 0; }
+li { margin: 8px 0; }
+li::marker { color: var(--accent); }
+code { font: 500 13.5px ui-monospace, SFMono-Regular, Menlo, monospace;
+       background: var(--accent-sub); padding: 2px 6px; border-radius: 5px; }
+img { max-width: 100%; height: auto; border-radius: 10px; }
+
+a { color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+/* ---- tables ---- */
+.table-wrap { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+th, td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+th {
+  background: var(--accent-sub); font: 700 11.5px var(--font-body);
+  letter-spacing: .07em; text-transform: uppercase; color: var(--accent-deep);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-sub); }
+
+/* ---- bits ---- */
+.meta { color: var(--text-muted); font-size: 13.5px; margin: 0 0 22px; }
+.guide-nav {
+  font-size: 13.5px; font-weight: 600; margin-bottom: 26px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--border); color: var(--text-muted);
+}
+.guide-nav a { color: var(--accent); }
+.footer {
+  margin-top: 52px; padding: 22px 24px; font-size: 14px;
+  color: var(--text-muted); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px; line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; padding: 0 16px 48px; }
+  .masthead { margin: 0 -16px 26px; padding: 26px 16px 22px; }
+  th, td { padding: 9px 11px; }
+}
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="masthead__kicker">Weekly Edition</p>
+      <h1 class="masthead__title">Flyover Heat Weekly</h1>
+      <p class="masthead__date">September 21, 2026</p>
+    </div>
+  </header>
+  <h1>THE FLYOVER HEAT WEEKLY</h1>
+<h2>Sep 14 – Sep 21, 2026</h2>
+
+
+<p><em>Sports card market intelligence from the Flyover Heat store — hot players, market-moving injuries, accolades, trades, and what's selling.</em></p>
+
+<p><em>Every card you see here was photographed, identified, priced against live market comps and listed by <strong><a href="https://dropzonecards.com">Drop Zone Cards</a></strong>, our own card automation — the same system reads the week's sports news to build this newsletter. If you sell cards yourself and the listing grind is what's stopping you scaling, that's exactly what we built it for.</em></p>
+
+<h2>🗞️ THE HOBBY DESK — WHAT'S MOVING THE MARKET</h2>
+<p>*The week across the hobby. Sourced from public reporting — every item links to verify.*</p>
+
+<ul>
+  <li>Topps Definitive Basketball made its NBA debut on Sept 17 at $7,499.99 a box: eight cards, six of them autographs on average, handed out by EQL raffle rather than sold over a counter. That is roughly $937 a card before the wrapper comes off, with Cooper Flagg, Dylan Harper and Kon Knueppel leading the rookie class and a Stephen Curry one-of-one on the checklist. Worth saying plainly — nothing about this product is built for someone who buys one card at a time, and that is fine. The reason to care is that the autographs coming out of boxes like this are what set the top-of-market numbers every other price gets measured against for the rest of the season. — per <a href="https://www.si.com/collectibles/high-end-chase-2025-26-topps-definitive-basketball">Sports Illustrated</a></li>
+</ul>
+
+<h2>🔥 HOT MOVES — PLAYERS WE HAVE</h2>
+<ul>
+  <li><strong>Luka Doncic</strong> — Former NBA champion drops brutal Lakers championship warning with Luka Doncic, Austin Reaves - Yahoo Sports. We have 11 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Luka+Doncic">$148.30 total</a>.</li>
+  <li><strong>Paige Bueckers</strong> — ‘More than deserving’ - Paige Bueckers backed for WNBA MVP over A’ja Wilson and Caitlin Clark. We have 6 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Paige+Bueckers">$112.74 total</a>.</li>
+  <li><strong>A'ja Wilson</strong> — 2026 WNBA awards: Will an all-but-guaranteed fifth MVP award solidify A’ja Wilson’s GOAT status? - Yahoo Sports. We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=A'ja+Wilson">$51.74 total</a>.</li>
+  <li><strong>Anthony Edwards</strong> — Timberwolves predicted to sign $277M NBA champion, 5-time All-Star to pair with Anthony Edwards - Yahoo Sports. We have 7 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Anthony+Edwards">$47.06 total</a>.</li>
+  <li><strong>De'Aaron Fox</strong> — Spurs predicted to trade for $347M NBA champion, nine-time All-Star to replace De'Aaron Fox - Yahoo Sports. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=De'Aaron+Fox">$44.11 total</a>.</li>
+  <li><strong>Cristiano Ronaldo</strong> — ’s AFC Champions League Golden Boot bid starts scoreless as three players share the early ... - World Soccer Talk. We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Cristiano+Ronaldo">$41.48 total</a>.</li>
+  <li><strong>Giannis Antetokounmpo</strong> — Heat predicted to go all-in for $347M 9x All-Star, NBA champion to pair with Giannis Antetokounmpo - sports.yahoo.com. We have 6 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Giannis+Antetokounmpo">$33.27 total</a>.</li>
+  <li><strong>Winston Santos</strong> — Recalled by Texas Rangers. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Winston+Santos">$28.10 total</a>.</li>
+  <li><strong>Lionel Messi</strong> — called up by Argentina for farewell match on Oct. 6 in Buenos Aires. We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Lionel+Messi">$21.20 total</a>.</li>
+  <li><strong>Jayson Tatum</strong> — Celtics reportedly sign $22M defensive menace, former first-rounder to pair with Jayson Tatum - sportingnews.com. We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Jayson+Tatum">$20.73 total</a>.</li>
+</ul>
+
+<h2>🎯 HEAT SEEKING — COMING SOON</h2>
+<p>Players gaining momentum across the leagues we cover. We're actively acquiring singles — watch the store.</p>
+
+<ul>
+  <li><strong>Paul George</strong> (NBA) — more than ready to prove himself after trade to Celtics - NBA.com</li>
+  <li><strong>Potential Trade</strong> (NFL) — Jets Linked to Potential Trade for 6-Foot-2 Steelers Cornerback - Yahoo Sports</li>
+  <li><strong>Cooper Flagg</strong> (NBA) — signs 1-of-1 rookie debut patch Topps card - ESPN</li>
+  <li><strong>James Harden</strong> (NBA) — agrees to 3-year, $97M deal to remain with Cavaliers - ESPN</li>
+  <li><strong>Blue Jackets</strong> (NHL) — Talbot signs 1-year contract with Blue Jackets - NHL.com</li>
+  <li><strong>Domantas Sabonis</strong> (NBA) — trade to Hornets facing huge obstacle, per NBA Insider - BasketNews.com</li>
+  <li><strong>Joey Porter</strong> (NFL) — NFL insider 'would keep an eye on' these two teams for possible trade for Steelers' Joey Porter Jr. - Yardbarker</li>
+  <li><strong>Saddiq Bey</strong> (NBA) — Pelicans, Saddiq Bey agree on 3-year, $55.5M contract extension - ESPN</li>
+</ul>
+
+<h2>🌡️ THE WEEK BY SPORT</h2>
+<p>Where the action was, by event count:</p>
+
+<ul>
+  <li><strong>GENERAL</strong>: 114 events</li>
+  <li><strong>MLB</strong>: 100 events</li>
+  <li><strong>NBA</strong>: 28 events</li>
+  <li><strong>NHL</strong>: 24 events</li>
+  <li><strong>NFL</strong>: 14 events</li>
+  <li><strong>WNBA</strong>: 5 events</li>
+  <li><strong>SOCCER</strong>: 2 events</li>
+</ul>
+
+<h2>🏆 AWARDS, CHAMPIONSHIPS & MILESTONES</h2>
+<ul>
+  <li><strong>Luka Doncic</strong> (NBA) — Former NBA champion drops brutal Lakers championship warning with Luka Doncic, Austin Reaves - Yahoo Sports</li>
+  <li><strong>Paige Bueckers</strong> (GENERAL) — ‘More than deserving’ - Paige Bueckers backed for WNBA MVP over A’ja Wilson and Caitlin Clark</li>
+  <li><strong>A'ja Wilson</strong> (WNBA) — 2026 WNBA awards: Will an all-but-guaranteed fifth MVP award solidify A’ja Wilson’s GOAT status? - Yahoo Sports</li>
+  <li><strong>Anthony Edwards</strong> (NBA) — Timberwolves predicted to sign $277M NBA champion, 5-time All-Star to pair with Anthony Edwards - Yahoo Sports</li>
+  <li><strong>De'Aaron Fox</strong> (NBA) — Spurs predicted to trade for $347M NBA champion, nine-time All-Star to replace De'Aaron Fox - sportingnews.com</li>
+  <li><strong>Cristiano Ronaldo</strong> (SOCCER) — ’s AFC Champions League Golden Boot bid starts scoreless as three players share the early ... - World Soccer Talk</li>
+  <li><strong>Giannis Antetokounmpo</strong> (NBA) — Heat predicted to go all-in for $347M 9x All-Star, NBA champion to pair with Giannis Antetokounmpo - Yahoo Sports</li>
+  <li><strong>Breanna Stewart</strong> (WNBA) — wins second FIBA Women’s World Cup MVP - USA Today</li>
+  <li><strong>Lamar Jackson</strong> (NFL) — NFL Week 1 overreactions: Bears to score most and allow most points in NFL? Lamar Jackson for MVP? - CBS Sports</li>
+  <li><strong>Brock Purdy</strong> (NFL) — keeps 49ers rolling with 'MVP' game vs. Dolphins</li>
+</ul>
+
+<h2>🏥 INJURIES — MARKET MOVERS</h2>
+<p>Significant injuries the market should weigh. Watch for short-term card-value dips.</p>
+
+<ul>
+  <li><strong>Jayden Daniels</strong> (NFL) — injury update: QB dislocates elbow vs. Cowboys, x-rays show no fracture - CBS Sports</li>
+  <li><strong>Caleb Williams</strong> (NFL) — set for imaging after suffering hamstring injury, per Adam Schefter - Saturday Down South</li>
+  <li><strong>Sean McVay</strong> (NFL) — Rams' Sean McVay: No timeline on Myles Garrett's return post knee surgery - NFL.com</li>
+  <li><strong>Cole Palmer</strong> (PREMIER) — temporarily suspended from Twitch after streaming EA FC 27 early: 'Unban me pls'</li>
+  <li><strong>Myles Garrett</strong> (NFL) — 2026 NFL Week 2 injury panic meter: Myles Garrett, A.J. Brown, Sam Darnold sidelined with lower body issues - CBS Sports</li>
+  <li><strong>Myles Garrett To</strong> (NFL) — Pelissero: Myles Garrett To Undergo Knee Surgery, Headed To Injured Reserve - Steelers Depot</li>
+</ul>
+
+<h2>🔁 TRADES & SIGNINGS</h2>
+<ul>
+  <li><strong>Luka Doncic</strong> (NBA, SIGNING) — Lakers predicted to sign $15M former first-rounder to revive career, learn from Luka Doncic - sportingnews.com</li>
+  <li><strong>Jayson Tatum</strong> (NBA, SIGNING) — Celtics reportedly sign $22M defensive menace, former first-rounder to pair with Jayson Tatum - sportingnews.com</li>
+  <li><strong>Hailey Van Lith</strong> (WNBA, SIGNING) — Signs with Tokomanawa Queens After WNBA Season Ends - Yahoo Sports</li>
+  <li><strong>Keyonte George</strong> (NBA, SIGNING) — agrees to 5-year extension with Jazz - NBA.com</li>
+  <li><strong>Kawhi Leonard</strong> (NBA, TRADE) — trade to Raptors completed after NBA punishes Clippers for breaking salary cap rules - Yahoo Sports</li>
+  <li><strong>Kawhi Leonard</strong> (NBA, SIGNING) — Toronto Raptors reportedly nearing deal on contract extension - NBC Sports</li>
+  <li><strong>Kawhi Leonard Nears</strong> (NBA, SIGNING) — Two-Year, $126 Million Contract Extension Agreement With Raptors - Yahoo Sports</li>
+  <li><strong>Noah Ostlund</strong> (NHL, SIGNING) — Sabres sign forward Noah Ostlund to 8-year, $52.8M contract</li>
+</ul>
+
+<h2>🆕 CALLUPS, DRAFT & DEBUTS</h2>
+<ul>
+  <li><strong>Star Tribune</strong> (MLB) — Twins promote former first-round pick to majors for final week of season - Star Tribune</li>
+  <li><strong>Move After Bad</strong> (NFL) — Jets Announce Roster Move After Bad News on Rookie First-Round Draft Pick - Yahoo Sports</li>
+  <li><strong>UCLA SS Roch</strong> (MLB) — 2026 MLB Draft results, live updates: White Sox nab UCLA SS Roch Cholowsky with No. 1 overall pick - Yahoo Sports</li>
+  <li><strong>Four-Year Contract With</strong> (NHL) — Former Blues First Round Pick Lands Four-Year Contract With Canadiens - sports.yahoo.com</li>
+  <li><strong>Former Charlotte Hornets'</strong> (NBA) — First Round Pick Headed to Europe - Sports Illustrated</li>
+  <li><strong>Winston Santos</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Lionel Messi</strong> (GENERAL) — 🚨 Lionel Messi called up by Argentina for the international break!</li>
+  <li><strong>Anthony Volpe</strong> (MLB) — Recalled by New York Yankees</li>
+</ul>
+
+<h2>💎 VALUE PICK OF THE WEEK</h2>
+<p><strong>2025 Panini WNBA Select Saniya Rivers RC Prizm Courtside #224 Connecticut Sun</strong> — <strong>$13.31</strong> (15 watchers)</p>
+
+<p>15 buyers already watching this one. Rookie card + premium parallel, priced under most comparable comps in the active market.</p>
+
+<h2>🔦 SPOTLIGHT</h2>
+<p><strong>Potential Trade</strong> (NFL)</p>
+
+<p><em>This week:</em> Jets Linked to Potential Trade for 6-Foot-2 Steelers Cornerback - Yahoo Sports.</p>
+
+<h2>🔥 ITEMS ON FIRE — NEW THIS WEEK</h2>
+<ul>
+  <li>2025-26 Topps Chrome Bundesliga Derry Scherhant Auto #BA-DSC Purple Wave /75 — $20.79</li>
+  <li>2025 Panini Select Road to FIFA World Cup 2026 Future UEFA Pau Cubarsi #22 Spain — $19.99</li>
+  <li>2015 Topps Finest Zack Wheeler Green Refractor #93 /99 NY Mets SP — $14.12</li>
+  <li>2024 Topps Chrome Ricky Pearsall RC #243 teal Refractor /250 San Francisco 49ers — $14.06</li>
+  <li>2025 Topps Flagship Series 1 Will Smith #212 Gold /2025 Los Angeles Dodgers — $11.05</li>
+  <li>2024 Panini Rookies & Stars Tee Higgins Orange #22 Cincinnati Bengals /249 — $10.15</li>
+</ul>
+
+<h2>👀 BUYERS ARE WATCHING</h2>
+<ul>
+  <li>1997 Skybox Marvel Metal Universe John Elway #8 — $133.09 (15 watchers)</li>
+  <li>2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare! — $164.99 (14 watchers)</li>
+  <li>2026 Topps Chrome Marvel Classic Comic Covers Spider Man Refractor #CC-10 — $72.00 (10 watchers)</li>
+  <li>2026 Topps Chrome Premier League Enzo Fernandez #MNL-9 Orange Prizm /25 — $67.00 (9 watchers)</li>
+</ul>
+
+<h2>🏷️ SOLD THIS WEEK</h2>
+<ul>
+  <li>2023-24 Topps Cosmic Chrome Pascal Siakam First Flight Auto /50 #FFS-PS — <strong>$36.99</strong></li>
+  <li>2024 Fleer Retro Looney Tunes Goofy Gophers #86F-22 86 Fleer Throwback — <strong>$16.99</strong></li>
+  <li>2024 Panini Donruss Optic Malik Nabers RC Blue Scope #271 Giants Football NFL — <strong>$16.99</strong></li>
+  <li>2025-26 Bowman Chrome UEFA Youth League 1st Bowman Mathis Albert Dortmund USA — <strong>$10.00</strong></li>
+  <li>2024-25 Panini Mosaic Epic Performers Luka Doncic Green #10 Lakers NBA — <strong>$8.26</strong></li>
+</ul>
+
+<h2>📅 UPCOMING SPORTS EVENTS</h2>
+<ul>
+  <li><strong>2026-09-24</strong> (3d): 2026 WNBA regular season final day</li>
+  <li><strong>2026-09-27</strong> (6d): 2026 WNBA Playoffs First Round begins [HIGH]</li>
+  <li><strong>2026-10-04</strong> (13d): 2026 MLB regular season final day</li>
+  <li><strong>2026-10-04</strong> (13d): MLB regular season ends — award race finalized</li>
+</ul>
+
+<h2>🎴 UPCOMING CARD RELEASES</h2>
+<p>Big drops on the horizon — comp values for these sets tend to spike 7-14 days pre-release.</p>
+
+<ul>
+  <li><strong>2026-09-23</strong> (2d) — <strong>2025-26 Panini National Treasures Road to FIFA World Cup 2026 Soccer</strong>: National Treasures Road to FIFA World Cup premium release</li>
+  <li><strong>2026-09-26</strong> (5d) — <strong>2026 Topps Five Star Baseball</strong>: 2026 Topps Five Star Baseball release</li>
+  <li><strong>2026-09-26</strong> (5d) — <strong>2026-27 Upper Deck Artifacts Hockey</strong>: nan</li>
+  <li><strong>2026-10-02</strong> (11d) — <strong>Reality Fracture</strong>: Reality Fracture (Magic) release — auto:scryfall</li>
+  <li><strong>2026-10-07</strong> (16d) — <strong>2026-27 Upper Deck Series 1 Hockey</strong>: 2026-27 Upper Deck Series 1 Hockey release</li>
+  <li><strong>2026-10-16</strong> (25d) — <strong>2026 Topps Update Series Baseball</strong>: 2026 Topps Update Series Baseball retail release</li>
+</ul>
+
+<h2>🎁 BUNDLE & SAVE</h2>
+<p>Buy more, save more: 5% off 2+ · 10% off 3+ · 15% off 4+.</p>
+
+<p>🔗 <a href="https://www.ebay.com/usr/tigerhawk-515">Browse the store</a></p>
+  <div class="footer">
+    You're reading the full edition of the Flyover Heat Weekly.
+    <br>Follow the store on eBay to receive the next one:
+    <a href="https://www.ebay.com/usr/tigerhawk-515">www.ebay.com/usr/tigerhawk-515</a><br>Or shop the same inventory direct: <a href="https://flyoverheat.myshopify.com">flyoverheat.myshopify.com</a>
+  </div>
+</body>
+</html>
