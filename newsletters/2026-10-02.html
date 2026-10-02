@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>THE FLYOVER HEAT WEEKLY</title>
+  <meta name="description" content="THE FLYOVER HEAT WEEKLY — Drop Zone empirical trading card market intelligence and pricing guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+/* Drop Zone / Flyover Heat public edition.
+   Palette and type follow webapp/static/arena.css -- the brand authority
+   (claude/aesthetic.md: violet accent, Bricolage display, Hanken body). A
+   reader who clicks through from eBay should land somewhere that looks like
+   the same company, not a default markdown dump. */
+:root {
+  --page-bg: #E7E9F3; --surface: #FFFFFF;
+  --text: #262A40; --text-strong: #0E1020; --text-muted: #4B5170;
+  --accent: #4133E0; --accent-deep: #3527C4; --accent-sub: #EEEDFE;
+  --border: #D8DBEA; --border-soft: #E6E8F2;
+  --hot: #98240F; --positive: #07583A;
+  --font-disp: 'Bricolage Grotesque', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0E1020; --surface: #191C30;
+    --text: #D6D9EA; --text-strong: #FFFFFF; --text-muted: #9AA0BE;
+    --accent: #8B7FF5; --accent-deep: #A79DF8; --accent-sub: #232640;
+    --border: #2E3252; --border-soft: #262A45;
+    --hot: #FF8A6B; --positive: #5FD3A3;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  max-width: 760px; margin: 0 auto; padding: 0 22px 64px;
+  line-height: 1.65; font-size: 16.5px;
+  color: var(--text); background: var(--page-bg);
+}
+
+/* ---- masthead ---- */
+.masthead {
+  margin: 0 -22px 34px; padding: 34px 22px 26px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff;
+}
+.masthead__inner { max-width: 760px; margin: 0 auto; }
+.masthead__kicker {
+  font: 600 11px var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  opacity: .78; margin: 0 0 8px;
+}
+.masthead__title {
+  font-family: var(--font-disp); font-size: clamp(30px, 6vw, 44px);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.02em; margin: 0;
+  color: #fff;
+}
+.masthead__date { margin: 12px 0 0; font-size: 14px; opacity: .85; }
+.masthead a { color: #fff; }
+
+/* ---- type ---- */
+h1 {
+  font-family: var(--font-disp); font-size: 30px; font-weight: 800;
+  line-height: 1.18; letter-spacing: -.015em; margin: 34px 0 14px;
+  color: var(--text-strong);
+}
+h2 {
+  font-family: var(--font-disp); font-size: 21px; font-weight: 700;
+  letter-spacing: -.01em; margin: 40px 0 14px; padding-bottom: 9px;
+  color: var(--text-strong); border-bottom: 2px solid var(--accent-sub);
+}
+h3 { font-family: var(--font-disp); font-size: 16.5px; font-weight: 700;
+     margin: 24px 0 8px; color: var(--text-strong); }
+p { margin: 14px 0; }
+strong { color: var(--text-strong); font-weight: 700; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 36px 0; }
+blockquote {
+  margin: 22px 0; padding: 16px 20px; background: var(--surface);
+  border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+  color: var(--text); font-size: 16px;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 22px; margin: 14px 0; }
+li { margin: 8px 0; }
+li::marker { color: var(--accent); }
+code { font: 500 13.5px ui-monospace, SFMono-Regular, Menlo, monospace;
+       background: var(--accent-sub); padding: 2px 6px; border-radius: 5px; }
+img { max-width: 100%; height: auto; border-radius: 10px; }
+
+a { color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+/* ---- tables ---- */
+.table-wrap { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+th, td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+th {
+  background: var(--accent-sub); font: 700 11.5px var(--font-body);
+  letter-spacing: .07em; text-transform: uppercase; color: var(--accent-deep);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-sub); }
+
+/* ---- bits ---- */
+.meta { color: var(--text-muted); font-size: 13.5px; margin: 0 0 22px; }
+.guide-nav {
+  font-size: 13.5px; font-weight: 600; margin-bottom: 26px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--border); color: var(--text-muted);
+}
+.guide-nav a { color: var(--accent); }
+.footer {
+  margin-top: 52px; padding: 22px 24px; font-size: 14px;
+  color: var(--text-muted); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px; line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; padding: 0 16px 48px; }
+  .masthead { margin: 0 -16px 26px; padding: 26px 16px 22px; }
+  th, td { padding: 9px 11px; }
+}
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="masthead__kicker">Weekly Edition</p>
+      <h1 class="masthead__title">Flyover Heat Weekly</h1>
+      <p class="masthead__date">October 2, 2026</p>
+    </div>
+  </header>
+  <h1>THE FLYOVER HEAT WEEKLY</h1>
+<h2>Sep 25 – Oct 02, 2026</h2>
+
+
+<p><em>Sports card market intelligence from the Flyover Heat store — hot players, market-moving injuries, accolades, trades, and what's selling.</em></p>
+
+<p><em>Every card you see here was photographed, identified, priced against live market comps and listed by <strong><a href="https://dropzonecards.com">Drop Zone Cards</a></strong>, our own card automation — the same system reads the week's sports news to build this newsletter. If you sell cards yourself and the listing grind is what's stopping you scaling, that's exactly what we built it for.</em></p>
+
+<h2>🔥 HOT MOVES — PLAYERS WE HAVE</h2>
+<ul>
+  <li><strong>Shedeur Sanders</strong> — NFLPA names Shedeur Sanders their Community MVP for Week 3. We have 5 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Shedeur+Sanders">$196.20 total</a>.</li>
+  <li><strong>Joe Burrow</strong> — on a hot streak (Stage (CIN) - 282 passing yds, 3 TD (CIN @ PIT, Final)). We have 8 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Joe+Burrow">$123.66 total</a>.</li>
+  <li><strong>Brock Bowers</strong> — on a hot streak (Stage (LV) - 116 receiving yds, 1 TD (LV @ NO, Final)). We have 9 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Brock+Bowers">$46.95 total</a>.</li>
+  <li><strong>Rob Dillingham</strong> — Charlotte Traded for Rob Dillingham, Then Quickly Cut the Former Cat - On3. We have 6 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Rob+Dillingham">$46.79 total</a>.</li>
+  <li><strong>Ja'Marr Chase</strong> — on a hot streak (Stage (CIN) - 98 receiving yds, 1 TD (CIN @ PIT, Final)). We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Ja'Marr+Chase">$31.69 total</a>.</li>
+  <li><strong>Matthew Stafford</strong> — on a hot streak (Stage (LAR) - 390 passing yds, 2 TD (LAR @ DEN, Final)). We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Matthew+Stafford">$28.29 total</a>.</li>
+  <li><strong>Winston Santos</strong> — Recalled by Texas Rangers. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Winston+Santos">$24.44 total</a>.</li>
+  <li><strong>Andrew Walters</strong> — Recalled by Cleveland Guardians. We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Andrew+Walters">$21.27 total</a>.</li>
+  <li><strong>Heston Kjerstad</strong> — Recalled by Baltimore Orioles. We have 1 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Heston+Kjerstad">$19.99 total</a>.</li>
+  <li><strong>Tyler Shough</strong> — on a hot streak (Stage (NO) - 255 passing yds, 4 TD (LV @ NO, Final)). We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Tyler+Shough">$15.48 total</a>.</li>
+</ul>
+
+<h2>🎯 HEAT SEEKING — COMING SOON</h2>
+<p>Players gaining momentum across the leagues we cover. We're actively acquiring singles — watch the store.</p>
+
+<ul>
+  <li><strong>Derrick Henry</strong> (NFL) — on a hot streak (Stage (BAL) - 89 rushing yds, 2 TD (BAL VS DAL, Final))</li>
+  <li><strong>Jahmyr Gibbs</strong> (NFL) — on a hot streak (Stage (DET) - 99 rushing yds, 2 TD (NYJ @ DET, Final))</li>
+</ul>
+
+<h2>🌡️ THE WEEK BY SPORT</h2>
+<p>Where the action was, by event count:</p>
+
+<ul>
+  <li><strong>MLB</strong>: 304 events</li>
+  <li><strong>GENERAL</strong>: 119 events</li>
+  <li><strong>NFL</strong>: 68 events</li>
+  <li><strong>NBA</strong>: 28 events</li>
+  <li><strong>NHL</strong>: 21 events</li>
+  <li><strong>WNBA</strong>: 4 events</li>
+  <li><strong>HOBBY</strong>: 1 events</li>
+</ul>
+
+<h2>🏆 AWARDS, CHAMPIONSHIPS & MILESTONES</h2>
+<ul>
+  <li><strong>Shedeur Sanders</strong> (GENERAL) — NFLPA names Shedeur Sanders their Community MVP for Week 3</li>
+  <li><strong>Angel Reese</strong> (WNBA) — named WNBA Defensive Player of the Year by Associated Press - The Baltimore Banner</li>
+  <li><strong>Angel Reese Voted</strong> (WNBA) — Dream Star Forward Angel Reese Voted WNBA Defensive Player of the Year - U.S. News & World Report</li>
+</ul>
+
+<h2>🏥 INJURIES — MARKET MOVERS</h2>
+<p>Significant injuries the market should weigh. Watch for short-term card-value dips.</p>
+
+<ul>
+  <li><strong>Myles Garrett</strong> (NFL) — Sources: Myles Garrett faces 6-week timeline from knee surgery - ESPN</li>
+  <li><strong>Puka Nacua</strong> (NFL) — LIVE NFL Week 3 inactives, injury tracker: Puka Nacua inactive for Rams on 'SNF' - CBS Sports</li>
+  <li><strong>Kon Knueppel</strong> (NBA) — Hornets star Kon Knueppel sidelined with hamstring injury</li>
+  <li><strong>Terrance Ferguson</strong> (GENERAL) — Ankle injury knocks Terrance Ferguson out of SNF</li>
+  <li><strong>Alec Pierce</strong> (GENERAL) — ruled out for Week 3</li>
+  <li><strong>Etienne Jr</strong> (NFL) — Saints RB Travis Etienne Jr. to sit with hamstring injury</li>
+</ul>
+
+<h2>🔁 TRADES & SIGNINGS</h2>
+<ul>
+  <li><strong>Rob Dillingham</strong> (NBA, TRADE) — Charlotte Traded for Rob Dillingham, Then Quickly Cut the Former Cat - On3</li>
+  <li><strong>Kawhi Leonard</strong> (NBA, SIGNING) — agrees to two year, $115 million extension with Raptors - FantasyPros</li>
+  <li><strong>James Harden</strong> (NBA, SIGNING) — agrees to 3-year, $97M deal to remain with Cavaliers - ESPN</li>
+  <li><strong>Jared Bednar</strong> (NHL, SIGNING) — Avalanche signing coach Jared Bednar to four-year extension</li>
+  <li><strong>Joey Porter Jr</strong> (NFL, TRADE) — NFL news, live updates: Joey Porter Jr. traded to Cowboys; Ravens QB Lamar Jackson limited; Texans WR Nico Collins returns - Yahoo Sports</li>
+  <li><strong>Gervon Dexter</strong> (NFL, SIGNING) — Falcons Agree to Contract Extension After Trade from Bears, Details Revealed - Bleacher Report</li>
+  <li><strong>Casey DeSmith</strong> (NHL, SIGNING) — Dallas Stars sign Casey DeSmith to a two-year, $5 million contract extension - NHL.com</li>
+  <li><strong>Ausar Thompson</strong> (NBA, SIGNING) — signs 5-year, $155 million rookie-scale extension with Pistons - NBA.com</li>
+</ul>
+
+<h2>🆕 CALLUPS, DRAFT & DEBUTS</h2>
+<ul>
+  <li><strong>Winston Santos</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Andrew Walters</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Heston Kjerstad</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Kristian Campbell</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>James Triantos</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Carson Williams</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>Kevin Alcántara</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Maximo Acosta</strong> (MLB) — Recalled by Miami Marlins</li>
+</ul>
+
+<h2>💎 VALUE PICK OF THE WEEK</h2>
+<p><strong>2016 Panini Absolute Football Rook Ink Jarran Reed RC Auto /150 #21 Seahawks</strong> — <strong>$11.99</strong> (8 watchers)</p>
+
+<p>8 buyers already watching this one. Rookie card + serial-numbered, priced under most comparable comps in the active market.</p>
+
+<h2>🔦 SPOTLIGHT</h2>
+<p><strong>Derrick Henry</strong> (NFL)</p>
+
+<p><em>This week:</em> on a hot streak (Stage (BAL) - 89 rushing yds, 2 TD (BAL VS DAL, Final)).</p>
+
+<h2>🔥 ITEMS ON FIRE — NEW THIS WEEK</h2>
+<ul>
+  <li>2026 Topps Chrome WWE Jimmy Uso #31 Blue Sparkle /150 — $12.40</li>
+  <li>2024 Panini Prizm Draft Picks Cameron Brink RC Rookie Holo Prizm Variation #89 — $10.15</li>
+</ul>
+
+<h2>👀 BUYERS ARE WATCHING</h2>
+<ul>
+  <li>1997 Skybox Marvel Metal Universe John Elway #8 — $133.09 (15 watchers)</li>
+  <li>2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare! — $164.99 (13 watchers)</li>
+  <li>2026 Topps Chrome Premier League Enzo Fernandez #MNL-9 Orange Prizm /25 — $67.00 (9 watchers)</li>
+</ul>
+
+<h2>🏷️ SOLD THIS WEEK</h2>
+<ul>
+  <li>2026 Topps Chrome Marvel Classic Comic Covers Spider Man Refractor #CC-10 — <strong>$77.50</strong></li>
+  <li>2025 Panini Phoenix - Paragon Tyler Shough #6 (RC) — <strong>$29.45</strong></li>
+  <li>1997 Skybox Metal Universe NBA Anfernee Hardaway #45 Orlando Magic Basketball — <strong>$19.99</strong></li>
+  <li>2025 Topps Chrome Ben Rice RC Refractor #139 New York Yankees Baseball MLB — <strong>$13.86</strong></li>
+  <li>Pokemon Mega Evolutions - Pitch Black Zeraora ex SIR #098/084 SIR — <strong>$8.00</strong></li>
+</ul>
+
+<h2>📅 UPCOMING SPORTS EVENTS</h2>
+<ul>
+  <li><strong>2026-10-04</strong> (2d): 2026 MLB regular season final day</li>
+  <li><strong>2026-10-04</strong> (2d): MLB regular season ends — award race finalized</li>
+  <li><strong>2026-10-23</strong> (21d): 2026 World Series Game 1 [VERY_HIGH]</li>
+  <li><strong>2026-10-25</strong> (23d): 2026 Heritage Classic - Jets vs Canadiens (Winnipeg)</li>
+  <li><strong>2026-10-26</strong> (24d): World Series Game 1 (estimated) [HIGH]</li>
+  <li><strong>2026-10-30</strong> (28d): Ballon d'Or ceremony (estimated) [HIGH]</li>
+  <li><strong>2026-10-31</strong> (29d): 2026 World Series Game 7 (if necessary) [VERY_HIGH]</li>
+</ul>
+
+<h2>🎴 UPCOMING CARD RELEASES</h2>
+<p>Big drops on the horizon — comp values for these sets tend to spike 7-14 days pre-release.</p>
+
+<ul>
+  <li><strong>2026-10-07</strong> (5d) — <strong>2026-27 Upper Deck Series 1 Hockey</strong>: 2026-27 Upper Deck Series 1 Hockey release</li>
+  <li><strong>2026-10-16</strong> (14d) — <strong>2026 Topps Update Series Baseball</strong>: 2026 Topps Update Series Baseball retail release</li>
+</ul>
+
+<h2>🎁 BUNDLE & SAVE</h2>
+<p>Buy more, save more: 5% off 2+ · 10% off 3+ · 15% off 4+.</p>
+
+<p>🔗 <a href="https://www.ebay.com/usr/tigerhawk-515">Browse the store</a></p>
+  <div class="footer">
+    You're reading the full edition of the Flyover Heat Weekly.
+    <br>Follow the store on eBay to receive the next one:
+    <a href="https://www.ebay.com/usr/tigerhawk-515">www.ebay.com/usr/tigerhawk-515</a><br>Or shop the same inventory direct: <a href="https://flyoverheat.myshopify.com">flyoverheat.myshopify.com</a>
+  </div>
+</body>
+</html>
