@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>THE FLYOVER HEAT WEEKLY</title>
+  <meta name="description" content="THE FLYOVER HEAT WEEKLY — Drop Zone empirical trading card market intelligence and pricing guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+/* Drop Zone / Flyover Heat public edition.
+   Palette and type follow webapp/static/arena.css -- the brand authority
+   (claude/aesthetic.md: violet accent, Bricolage display, Hanken body). A
+   reader who clicks through from eBay should land somewhere that looks like
+   the same company, not a default markdown dump. */
+:root {
+  --page-bg: #E7E9F3; --surface: #FFFFFF;
+  --text: #262A40; --text-strong: #0E1020; --text-muted: #4B5170;
+  --accent: #4133E0; --accent-deep: #3527C4; --accent-sub: #EEEDFE;
+  --border: #D8DBEA; --border-soft: #E6E8F2;
+  --hot: #98240F; --positive: #07583A;
+  --font-disp: 'Bricolage Grotesque', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0E1020; --surface: #191C30;
+    --text: #D6D9EA; --text-strong: #FFFFFF; --text-muted: #9AA0BE;
+    --accent: #8B7FF5; --accent-deep: #A79DF8; --accent-sub: #232640;
+    --border: #2E3252; --border-soft: #262A45;
+    --hot: #FF8A6B; --positive: #5FD3A3;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  max-width: 760px; margin: 0 auto; padding: 0 22px 64px;
+  line-height: 1.65; font-size: 16.5px;
+  color: var(--text); background: var(--page-bg);
+}
+
+/* ---- masthead ---- */
+.masthead {
+  margin: 0 -22px 34px; padding: 34px 22px 26px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff;
+}
+.masthead__inner { max-width: 760px; margin: 0 auto; }
+.masthead__kicker {
+  font: 600 11px var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  opacity: .78; margin: 0 0 8px;
+}
+.masthead__title {
+  font-family: var(--font-disp); font-size: clamp(30px, 6vw, 44px);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.02em; margin: 0;
+  color: #fff;
+}
+.masthead__date { margin: 12px 0 0; font-size: 14px; opacity: .85; }
+.masthead a { color: #fff; }
+
+/* ---- type ---- */
+h1 {
+  font-family: var(--font-disp); font-size: 30px; font-weight: 800;
+  line-height: 1.18; letter-spacing: -.015em; margin: 34px 0 14px;
+  color: var(--text-strong);
+}
+h2 {
+  font-family: var(--font-disp); font-size: 21px; font-weight: 700;
+  letter-spacing: -.01em; margin: 40px 0 14px; padding-bottom: 9px;
+  color: var(--text-strong); border-bottom: 2px solid var(--accent-sub);
+}
+h3 { font-family: var(--font-disp); font-size: 16.5px; font-weight: 700;
+     margin: 24px 0 8px; color: var(--text-strong); }
+p { margin: 14px 0; }
+strong { color: var(--text-strong); font-weight: 700; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 36px 0; }
+blockquote {
+  margin: 22px 0; padding: 16px 20px; background: var(--surface);
+  border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+  color: var(--text); font-size: 16px;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 22px; margin: 14px 0; }
+li { margin: 8px 0; }
+li::marker { color: var(--accent); }
+code { font: 500 13.5px ui-monospace, SFMono-Regular, Menlo, monospace;
+       background: var(--accent-sub); padding: 2px 6px; border-radius: 5px; }
+img { max-width: 100%; height: auto; border-radius: 10px; }
+
+a { color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+/* ---- tables ---- */
+.table-wrap { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+th, td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+th {
+  background: var(--accent-sub); font: 700 11.5px var(--font-body);
+  letter-spacing: .07em; text-transform: uppercase; color: var(--accent-deep);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-sub); }
+
+/* ---- bits ---- */
+.meta { color: var(--text-muted); font-size: 13.5px; margin: 0 0 22px; }
+.guide-nav {
+  font-size: 13.5px; font-weight: 600; margin-bottom: 26px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--border); color: var(--text-muted);
+}
+.guide-nav a { color: var(--accent); }
+.footer {
+  margin-top: 52px; padding: 22px 24px; font-size: 14px;
+  color: var(--text-muted); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px; line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; padding: 0 16px 48px; }
+  .masthead { margin: 0 -16px 26px; padding: 26px 16px 22px; }
+  th, td { padding: 9px 11px; }
+}
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="masthead__kicker">Weekly Edition</p>
+      <h1 class="masthead__title">Flyover Heat Weekly</h1>
+      <p class="masthead__date">October 10, 2026</p>
+    </div>
+  </header>
+  <h1>THE FLYOVER HEAT WEEKLY</h1>
+<h2>Oct 03 – Oct 10, 2026</h2>
+
+
+<p><em>Sports card market intelligence from the Flyover Heat store — hot players, market-moving injuries, accolades, trades, and what's selling.</em></p>
+
+<p><em>Every card you see here was photographed, identified, priced against live market comps and listed by <strong><a href="https://dropzonecards.com">Drop Zone Cards</a></strong>, our own card automation — the same system reads the week's sports news to build this newsletter. If you sell cards yourself and the listing grind is what's stopping you scaling, that's exactly what we built it for.</em></p>
+
+<h2>🗞️ THE HOBBY DESK — WHAT'S MOVING THE MARKET</h2>
+<p>*The week across the hobby. Sourced from public reporting — every item links to verify.*</p>
+
+<ul>
+  <li>Florida collector pulls 1-of-1 Ohtani card, sells it for $11M — per <a href="https://news.google.com/rss/articles/CBMi_glBVV95cUxQdUJvZ2luMERSSTNGSkVYM0tzVkZRTDhDanJYc0ZjQlRKc2t4NkxhYUwxT01Sbmtod2I1WGQzT3hfT19aNkJReWZVVHQ0TjJSdUdFaTRyYWEyVVFIc1FjY2xSYU8tckoxTEZHUVpyV1hOVDBUUGZBUDRYUlF0bVpkd0FFa0llVXpoNG9YVUZjWFljOWhPQzhjZ1lFcW9JenNZSUZjNnNmOWpOVk94UmlmejBNUmtBMXNQX0pLZFVHRnNlLXBId0NfdU5zZE1TSjEzUk5DV04tdjY3N1AwZHctd0Q3NzA2UldMRWxZaENQWWp3TndDelJlVUZ2VVprdjJSVWRkUDFYTGRQaE9XTFZXRGhrSjhXZ0tIa2JXRDlVakRHRFk0bS1yR0ZrMzlaYVNDQk51cFBsV0NudXBWTy1scW5vdmVYSTJxNEgxUG9xQVMtckRlVnF2VFpXcjNrSVJyMzlvWEZPODQwZU4xWTNzc0RIdlJJU2h1em82bmdRdHZ5ajlyTWxBbDJkcGJvYmxuamRjb1VEXzVENWFCZmYtQm1CSl9oSnlrSm1qYnUtNlIzMVVrYmxQV0V3TXdDY3pidUpmRl9PenBtbGxhZFVaWWNOQTRycDdralNrMm1lUVJKR2ZQNUl3eDd0cnFQc0pHcVNjRVQ2eGJXVVZDNUdTcnBmMnlmWm11WFQ1dFpkQjNrNHg1VGVzRGhNMnVBYWRnbkdqVEphSjVuZzItRkd2M1hNM0hldGtVcTJUdmhwcXF2ZzFsQVlVUldDLXJuLThGU184Zy1mNXlIS3ZKaXVvVkFENG9PejNTQi1JODlWZVliQkd2eF9XMUFEX0ZpdXBGc3FpczN4QW1JMW1VTmlGQlVpb2w1NDJwV0dQRkI3bkJ5MGE5OUhaZEllSFd1R2EtUUtfQm1ieHlIUVJRQ3JYNUp6Nll6VWM3RXJPY1JjN19HdzJpbWRmMDh4b2l5ZEdTNGZzd2o1VnhSSGNGdktPMGFUR3ZoUHFMMDF6LVRHWHNUY1N3eUw3QjhJYTZsTlFJTFMyRkNLaEt6dnNrWFlFVkpPMWxibDVfNk8ydUlzYXdpUURzWGYtU0ZpS01ZLWltc08zRkFyWU1IeE54QTJvWXVYRFdPcld1OHEyY3VsYlpDcVhvS2ZmWnBnVmtjS2RIYU9DNTEzalZYQ0UtZDVsVEZncmFST1E1cV9NRmdUTjZQejZ5WDJlTHM2NGZMMEVLQTdCNFpReU5yZnRfZndxUHRMUHBOVko3YlFINFFnaS0zdThvZ0RYT0FjdnVPM2hCVzRmWHdpUmJSekgyRngyaS1TMVgzWFJBa3ZWWUdZT21uRFFiWHljcEZrZExWUF84ZWhaeTVBT21Jdm90c1F5UXUzbVVTZnVuR1BOZWxqeXRuMFlMbFJaR0tqYWk3Tjd4eU1vRGgtWXQ0Y2pDVnJzX3hGQzk0QTE5c0I4ZmJoTjlsTktIT2s4TzktR1NyVTBvVHB2aEJkRU1XOF93cm5nVmd5M1Nwb3h0cnBqOTRLT3FxV21FeWJVRXBWWEFULXY5cjBPQnVrbEFfOHBpSnFOVnZkOWZpeWc4NUhqQWxLLVFXUllEWEl5VG1ndi1fdWM1WHFYWl9ISDRWRUI1eU9JcmE2SUpYMzNBTnMycUVnMzRBQ1NvNGphQ0pKbWgxbFA4T2g5cngzVi1PRzI5Vmc?oc=5">ABC30 Fresno</a></li>
+</ul>
+
+<h2>🔥 HOT MOVES — PLAYERS WE HAVE</h2>
+<ul>
+  <li><strong>Jonathan Taylor</strong> — on a hot streak (Stage (IND) - 95 rushing yds, 2 TD (IND VS WSH, Final)). We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Jonathan+Taylor">$184.77 total</a>.</li>
+  <li><strong>Luka Doncic</strong> — Gets Bold MVP Prediction Ahead of 2026-27 NBA Season With Health Caveat. We have 11 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Luka+Doncic">$138.75 total</a>.</li>
+  <li><strong>Joe Burrow</strong> — on a hot streak (Stage (CIN) - 428 passing yds, 1 TD (JAX @ CIN, Final)). We have 8 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Joe+Burrow">$128.57 total</a>.</li>
+  <li><strong>Konnor Griffin</strong> — makes MLB debut for Pittsburgh Pirates - MLB.com. We have 6 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Konnor+Griffin">$74.25 total</a>.</li>
+  <li><strong>A'ja Wilson</strong> — named MVP. We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=A'ja+Wilson">$52.71 total</a>.</li>
+  <li><strong>Over A'ja Wilson</strong> — 7-Time NBA Champion Chooses Fever Star Over A'ja Wilson as WNBA MVP - Yahoo Sports. We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Over+A'ja+Wilson">$52.71 total</a>.</li>
+  <li><strong>Giannis Antetokounmpo</strong> — Heat named landing spot for $118M NBA champion, 9-time All-Star to join Giannis Antetokounmpo - Yahoo Sports. We have 9 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Giannis+Antetokounmpo">$33.93 total</a>.</li>
+  <li><strong>Brock Bowers</strong> — on a hot streak (Stage (LV) - 86 receiving yds, 1 TD (KC @ LV, Final)). We have 7 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Brock+Bowers">$31.15 total</a>.</li>
+  <li><strong>Winston Santos</strong> — Recalled by Texas Rangers. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Winston+Santos">$28.28 total</a>.</li>
+  <li><strong>Drake Maye</strong> — on a hot streak (Stage (NE) - 269 passing yds, 3 TD (NE @ BUF, Final)). We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Drake+Maye">$26.60 total</a>.</li>
+</ul>
+
+<h2>🎯 HEAT SEEKING — COMING SOON</h2>
+<p>Players gaining momentum across the leagues we cover. We're actively acquiring singles — watch the store.</p>
+
+<ul>
+  <li><strong>Chris Olave</strong> (NFL) — on a hot streak (Stage (NO) - 116 receiving yds, 0 TD (ATL @ NO, Final))</li>
+  <li><strong>CeeDee Lamb</strong> (NFL) — on a hot streak (Stage (DAL) - 189 receiving yds, 1 TD (DAL @ HOU, Final))</li>
+  <li><strong>Jared Goff</strong> (NFL) — on a hot streak (Stage (DET) - 412 passing yds, 1 TD (DET @ CAR, Final))</li>
+  <li><strong>C.J. Stroud</strong> (NFL) — on a hot streak (Stage (HOU) - 347 passing yds, 2 TD (DAL @ HOU, Final))</li>
+  <li><strong>Jerry Jeudy</strong> (NFL) — has disappeared from Browns offense: Five teams that could trade for WR - CBS Sports</li>
+  <li><strong>Cooper Flagg</strong> (NBA) — signs 1-of-1 rookie debut patch Topps card - ESPN</li>
+  <li><strong>Tom Brady</strong> (NFL) — ’s Former Super Bowl WR Signs With Chicago Bears - heavy.com</li>
+  <li><strong>Opening Day</strong> (MLB) — How about THAT for an MLB debut?! Top prospects steal the show on Opening Day - MLB.com</li>
+</ul>
+
+<h2>🌡️ THE WEEK BY SPORT</h2>
+<p>Where the action was, by event count:</p>
+
+<ul>
+  <li><strong>MLB</strong>: 268 events</li>
+  <li><strong>GENERAL</strong>: 104 events</li>
+  <li><strong>NFL</strong>: 67 events</li>
+  <li><strong>NBA</strong>: 25 events</li>
+  <li><strong>NHL</strong>: 13 events</li>
+  <li><strong>WNBA</strong>: 9 events</li>
+  <li><strong>HOBBY</strong>: 1 events</li>
+</ul>
+
+<h2>🏆 AWARDS, CHAMPIONSHIPS & MILESTONES</h2>
+<ul>
+  <li><strong>Luka Doncic</strong> (GENERAL) — Gets Bold MVP Prediction Ahead of 2026-27 NBA Season With Health Caveat</li>
+  <li><strong>A'ja Wilson</strong> (WNBA) — named MVP</li>
+  <li><strong>Over A'ja Wilson</strong> (WNBA) — 7-Time NBA Champion Chooses Fever Star Over A'ja Wilson as WNBA MVP - Yahoo Sports</li>
+  <li><strong>Giannis Antetokounmpo</strong> (NBA) — Heat named landing spot for $118M NBA champion, 9-time All-Star to join Giannis Antetokounmpo - sports.yahoo.com</li>
+  <li><strong>Lamar Jackson</strong> (NFL) — 2026 NFL First-Quarter All-Pro Team: Lamar Jackson leads the team at QB, Will Anderson Jr. headlines defense - PFF</li>
+  <li><strong>Angel Reese</strong> (WNBA) — Dream's defensive showcase, led by Angel Reese, stymies Liberty in Game 1 of WNBA semifinals: '[DPOY] is in Atlanta for a reason' - Yahoo Sports</li>
+  <li><strong>Karl-Anthony Towns</strong> (NBA) — NBA champion drops warning for Knicks amid Karl-Anthony Towns extension - BasketNews.com</li>
+  <li><strong>Brock Purdy</strong> (NFL) — NFL MVP tracker: 49ers QB Brock Purdy leads rankings through first four weeks - NFL.com</li>
+  <li><strong>Victor Wembanyama</strong> (NBA) — NBA MVP Predictions 2026-27: Can anyone keep Victor Wembanyama from first MVP? - NBC Sports</li>
+  <li><strong>Napheesa Collier</strong> (WNBA) — landing spots: Three potential destinations if five-time All-Star leaves Lynx as free agent - CBS Sports</li>
+</ul>
+
+<h2>🏥 INJURIES — MARKET MOVERS</h2>
+<p>Significant injuries the market should weigh. Watch for short-term card-value dips.</p>
+
+<ul>
+  <li><strong>Paige Bueckers Gains</strong> (GENERAL) — Jason Whitlock’s Respect for Showing Raw Emotion After Season-Ending Loss</li>
+  <li><strong>Jayden Daniels Week</strong> (NFL) — Ian Rapoport fuels Jayden Daniels Week 5 elbow injury return optimism - sports.yahoo.com</li>
+  <li><strong>Jayden Daniels</strong> (NFL) — Adam Schefter provides update on Jayden Daniels and potential surgery - Commanders Wire</li>
+  <li><strong>Liv Morgan</strong> (GENERAL) — WWE star Liv Morgan reveals undergoing major surgery for nasty forehead injury</li>
+  <li><strong>Ladd McConkey</strong> (GENERAL) — sidelined Wednesday</li>
+  <li><strong>Lamar Jackson</strong> (NFL) — NFL injury tracker Week 5: Latest news, fantasy implications as Lamar Jackson (ankle) and Saquon Barkley (hamstring) ruled out, Caleb Williams (hamstring) questionable - Yahoo Sports</li>
+</ul>
+
+<h2>🔁 TRADES & SIGNINGS</h2>
+<ul>
+  <li><strong>Rudy Gobert</strong> (NBA, TRADE) — Boston Celtics Trade For Rudy Gobert Seems Even More Likely After NEW NBA Rumor - Sportsnaut</li>
+  <li><strong>Josh Hart</strong> (NBA, SIGNING) — Takeaways from Knicks pausing contract extension talks: Is Josh Hart's time in New York running out? - CBS Sports</li>
+  <li><strong>Karl-Anthony Towns</strong> (NBA, SIGNING) — Knicks' Karl-Anthony Towns not expecting contract extension soon - ESPN</li>
+  <li><strong>James Harden</strong> (NBA, SIGNING) — agrees to 3-year, $97M deal to remain with Cavaliers - ESPN</li>
+  <li><strong>Jalen Duren</strong> (NBA, SIGNING) — signs five-year extension with Pistons - FantasyPros</li>
+  <li><strong>Ausar Thompson</strong> (NBA, SIGNING) — signs 5-year, $155 million rookie-scale extension with Pistons - NBA.com</li>
+  <li><strong>Cooper Flagg</strong> (NBA, SIGNING) — signs 1-of-1 rookie debut patch Topps card - ESPN</li>
+  <li><strong>Kirill Marchenko</strong> (NHL, TRADE) — Maple Leafs in talks to trade for, extend Kirill Marchenko, send Matthew Knies to Blue Jackets: Sources - The Athletic - The New York Times</li>
+</ul>
+
+<h2>🆕 CALLUPS, DRAFT & DEBUTS</h2>
+<ul>
+  <li><strong>Kyrie Irving</strong> (NBA) — Mavericks predicted to trade Kyrie Irving for $150M former first round pick, major draft capital - Sporting News</li>
+  <li><strong>Most Likely</strong> (NBA) — Top 2025 NBA Draft Picks Most Likely to Have a Breakout Year Two - Sports Illustrated</li>
+  <li><strong>Career Decision</strong> (NFL) — Former Saints First-Round Pick Makes Abrupt Career Decision at 30 - Yahoo Sports</li>
+  <li><strong>Kaytron Allen</strong> (NFL) — Commanders roster moves: Sixth-round NFL draft pick Kaytron Allen waived - Hogs Haven</li>
+  <li><strong>Rough Patch</strong> (NHL) — Predators First-Round Pick Hitting a Rough Patch in the KHL - Yahoo Sports</li>
+  <li><strong>Gavin McKenna</strong> (NHL) — No. 1 overall pick Gavin McKenna scores first NHL goal for Maple Leafs - CTV News</li>
+  <li><strong>Pick Is On</strong> (NHL) — Former Blackhawks First-Round Pick Is On A Major Hot Streak With Utah - Yahoo Sports</li>
+  <li><strong>Going To</strong> (NHL) — 'It's Going To Be a Big Jump': Projected NHL No. 1 Overall Pick Landon DuPont Welcomes Challenge Of The NCAA - The Hockey News</li>
+  <li><strong>Right Time</strong> (NFL) — UDPATE: Why It Was the Right Time for the Dolphins to Kick the Tires on Another Former First-Round Pick - Sports Illustrated</li>
+  <li><strong>Star Tribune</strong> (NFL) — This Vikings first-round pick is becoming an ‘animal’ for an improving O-line - Star Tribune</li>
+  <li><strong>Konnor Griffin</strong> (MLB) — makes MLB debut for Pittsburgh Pirates - MLB.com</li>
+  <li><strong>Winston Santos</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Andrew Walters</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Kristian Campbell</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>Carson Williams</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>James Triantos</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Kevin Alcántara</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Hyeseong Kim</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Will Wagner</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Nick Yorke</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Josh Simpson</strong> (MLB) — Recalled by Seattle Mariners</li>
+  <li><strong>Zach Dezenzo</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Jared Simpson</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Ricky Tiedemann</strong> (MLB) — Recalled by Toronto Blue Jays</li>
+  <li><strong>Chayce McDermott</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Tommy Troy</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Colby Thomas</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Juan Burgos</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Hayden Senger</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Caden Dana</strong> (MLB) — Recalled by Los Angeles Angels</li>
+  <li><strong>Chase Petty</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Emmet Sheehan</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Troy Watson</strong> (MLB) — Recalled by Seattle Mariners</li>
+  <li><strong>Carlos Duran</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Yunior Marte</strong> (MLB) — Recalled by San Francisco Giants</li>
+  <li><strong>Ethan Roberts</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Spencer Arrighetti</strong> (MLB) — Recalled by Toronto Blue Jays</li>
+  <li><strong>Julian Aguiar</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Max Schuemann</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Nestor Cortes</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Eric Wagaman</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Chad Stevens</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Jayden Murray</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Drew Thorpe</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>David Davalillo</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Cade Povich</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Brandon Sproat</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Chase Solesky</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Jake Bird</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Coleman Crow</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Grant Holman</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Kendry Rojas</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Ronan Kopp</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Easton McGee</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Mitch Bratt</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>BJ Murray Jr.</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Junior Perez</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Cooper Hjerpe</strong> (MLB) — Recalled by St. Louis Cardinals</li>
+  <li><strong>Trey Gibson</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Shawn Ross</strong> (MLB) — Recalled by Toronto Blue Jays</li>
+  <li><strong>Yaramil Hiraldo</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Jared Koenig</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Ryan Fernandez</strong> (MLB) — Recalled by St. Louis Cardinals</li>
+  <li><strong>Joey Loperfido</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Blake Walston</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Codi Heuer</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Garrett Hawkins</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Mitch Spence</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Logan Porter</strong> (MLB) — Recalled by Los Angeles Angels</li>
+  <li><strong>Franco Aleman</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>TJ Shook</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>José Rodríguez</strong> (MLB) — Recalled by Toronto Blue Jays</li>
+  <li><strong>Blake Perkins</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Christian Cairo</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Paxton Schultz</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Hayden Juenger</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Jose Franco</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Kohl Drake</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Leo Balcazar</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Ben Peoples</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Yohendrick Piñango</strong> (MLB) — Recalled by Toronto Blue Jays</li>
+  <li><strong>Hayden Harris</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Ronel Blanco</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Gerardo Carrillo</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>CJ Van Eyk</strong> (MLB) — Recalled by Toronto Blue Jays</li>
+  <li><strong>Darell Hernaiz</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Jack Weisenburger</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Gavin Hollowell</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Kameron Misner</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Jake Miller</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Blake Adams</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Mason McCoy</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Andrew Pinckney</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Sam Aldegheri</strong> (MLB) — Recalled by Los Angeles Angels</li>
+  <li><strong>Jasson Domínguez</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Thomas Harrington</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Elmer Rodríguez</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Tyler Ferguson</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Tyler Samaniego</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>Reed Trimble</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Cooper Ingle</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>LuJames Groover</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Patrick Wisdom</strong> (MLB) — Recalled by Seattle Mariners</li>
+  <li><strong>Patrick Monteverde</strong> (MLB) — Recalled by Miami Marlins</li>
+  <li><strong>Steven Zobac</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Ryan Walker</strong> (MLB) — Recalled by San Francisco Giants</li>
+  <li><strong>Eliezer Alfonzo</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Zach Maxwell</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Clayton Beeter</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Kai-Wei Teng</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Devereaux Harrison</strong> (MLB) — Recalled by Toronto Blue Jays</li>
+  <li><strong>Hunter Bigge</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Ryan Bliss</strong> (MLB) — Recalled by Seattle Mariners</li>
+  <li><strong>Carson Palmquist</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Kahlil Watson</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Emiliano Teodo</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Luis Morales</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Ivan Johnson</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Luis De León</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Logan O'Hoppe</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Garrett Stallings</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Drey Jameson</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Tyler Uberstine</strong> (MLB) — Recalled by Atlanta Braves</li>
+  <li><strong>Jim Jarvis</strong> (MLB) — Recalled by Atlanta Braves</li>
+  <li><strong>JP Sears</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Orion Kerkering</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Luke Williams</strong> (MLB) — Selected by Atlanta Braves</li>
+  <li><strong>Khristian Curtis</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Kyle Nicolas</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Jackson Kent</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Rowdy Tellez</strong> (MLB) — Selected by Atlanta Braves</li>
+  <li><strong>Dylan Ross</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Wilber Dotel</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Hunter Stratton</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Yilber Díaz</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Tekoah Roby</strong> (MLB) — Recalled by St. Louis Cardinals</li>
+  <li><strong>Brenan Hanifee</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Tyler Callihan</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Thayron Liranzo</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Blas Castaño</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Henry Baez</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Brandan Bidois</strong> (MLB) — Recalled by Miami Marlins</li>
+  <li><strong>Enmanuel De Jesus</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Shane Smith</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Sterlin Thompson</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Will Make Their</strong> (MLB) — 3 Marlins Prospects Who Will Make Their MLB Debut in 2027 - Yahoo Sports</li>
+  <li><strong>Moisés Chace</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Edwin Arroyo</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Dylan Ray</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Blake Burkhalter</strong> (MLB) — Recalled by Atlanta Braves</li>
+  <li><strong>Ben Kudrna</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Jonathan Cannon</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Joe Boyle</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>Hendry Mendez</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Matt Wallner</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Jhony Brito</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Rodolfo Durán</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Jordan Wicks</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Noelvi Marte</strong> (MLB) — Recalled by Cincinnati Reds</li>
+  <li><strong>Logan Driscoll</strong> (MLB) — Recalled by Miami Marlins</li>
+  <li><strong>Rolddy Muñoz</strong> (MLB) — Recalled by Atlanta Braves</li>
+  <li><strong>Paul Gervase</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Johnathan Rodríguez</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>J.C. Escarra</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Collin Price</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Cameron Foster</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Jimmy Crooks</strong> (MLB) — Recalled by St. Louis Cardinals</li>
+  <li><strong>Tanner McDougal</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Edgar Quero</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Tristan Gray</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Zach Morgan</strong> (MLB) — Recalled by San Francisco Giants</li>
+  <li><strong>Richard Fitts</strong> (MLB) — Recalled by St. Louis Cardinals</li>
+  <li><strong>Brant Hurter</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Zak Kent</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Sebastián Rivero</strong> (MLB) — Recalled by Los Angeles Angels</li>
+  <li><strong>Yosver Zulueta</strong> (MLB) — Recalled by Baltimore Orioles</li>
+  <li><strong>Willie MacIver</strong> (MLB) — Recalled by Seattle Mariners</li>
+  <li><strong>Tyler Black</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Gavin Collyer</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Eiberson Castellano</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Kenny Piper</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>Mason Black</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Sawyer Gipson-Long</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Gage Workman</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Gabriel Gonzalez</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Adam Macko</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Zach Brzykcy</strong> (MLB) — Recalled by Miami Marlins</li>
+  <li><strong>Rikuu Nishida</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Garrett Acton</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Kyle Backhus</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>A's No</strong> (MLB) — 5 prospect Bolte makes immediate impact in MLB debut to remember - MLB.com</li>
+  <li><strong>Max Clark</strong> (MLB) — Tigers prospect Max Clark records 3 hits, RBI in MLB debut - ESPN</li>
+  <li><strong>LHP Sears</strong> (MLB) — Tigers call up No. 14 prospect LHP Sears for MLB debut - MLB.com</li>
+  <li><strong>Walker Jenkins</strong> (MLB) — Twins' top prospect, singles in MLB debut - ESPN</li>
+  <li><strong>BJ Murray Jr</strong> (MLB) — Cubs call up their No. 19 prospect BJ Murray Jr. for MLB debut vs. Brewers - MLB.com</li>
+  <li><strong>Cameron Weston</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Andrew Hoffmann</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Eric Orze</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Romy Gonzalez</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>Leandro Lopez</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Jadher Areinamo</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>Brett Kerry</strong> (MLB) — Recalled by Los Angeles Angels</li>
+  <li><strong>Luis Perales</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Gabriel Rincones Jr.</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Akil Baddoo</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Tsung-Che Cheng</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>James Karinchak</strong> (MLB) — Recalled by Atlanta Braves</li>
+  <li><strong>Jeferson Quero</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Joey Estes</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Josh White</strong> (MLB) — Recalled by Miami Marlins</li>
+  <li><strong>Maximo Acosta</strong> (MLB) — Recalled by Miami Marlins</li>
+  <li><strong>Joe Rock</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Alan Rangel</strong> (MLB) — Recalled by Philadelphia Phillies</li>
+  <li><strong>Kade Morris</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Nacho Alvarez Jr.</strong> (MLB) — Recalled by Los Angeles Angels</li>
+  <li><strong>Miguel Mendez</strong> (MLB) — Recalled by San Francisco Giants</li>
+  <li><strong>Jhostynxon Garcia</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Corey Julks</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Jedixson Paez</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>Robinson Ortiz</strong> (MLB) — Recalled by Seattle Mariners</li>
+  <li><strong>Andrew Sears</strong> (MLB) — Recalled by Detroit Tigers</li>
+  <li><strong>Sean Sullivan</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Jack Brannigan</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Matt Svanson</strong> (MLB) — Recalled by St. Louis Cardinals</li>
+  <li><strong>Logan Allen</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Zach Cole</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Landon Knack</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Alimber Santa</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Yorman Gómez</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Cesar Perdomo</strong> (MLB) — Recalled by San Francisco Giants</li>
+  <li><strong>Braden Nett</strong> (MLB) — Recalled by Athletics</li>
+  <li><strong>Marco Raya</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Evan Sisk</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Gabriel Hughes</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Jeff Criswell</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Eddy Yean</strong> (MLB) — Recalled by Washington Nationals</li>
+  <li><strong>Justin Dean</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Kyle Manzardo</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>CJ Kayfus</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Nick Madrigal</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>Ryan Ritter</strong> (MLB) — Recalled by Colorado Rockies</li>
+  <li><strong>Jack Anderson</strong> (MLB) — Recalled by Minnesota Twins</li>
+  <li><strong>Kade Strowd</strong> (MLB) — Recalled by Arizona Diamondbacks</li>
+  <li><strong>Angel Chivilli</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Tyler Schweitzer</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Raymond Burgos</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>Ryan Bergert</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Opening Day</strong> (MLB) — How about THAT for an MLB debut?! Top prospects steal the show on Opening Day - MLB.com</li>
+  <li><strong>Nate Eaton</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>Austin Peterson</strong> (MLB) — Recalled by Cleveland Guardians</li>
+  <li><strong>Jesse Scholtens</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>Braxton Garrett</strong> (MLB) — Recalled by Chicago Cubs</li>
+  <li><strong>Raynel Delgado</strong> (MLB) — Recalled by Houston Astros</li>
+  <li><strong>Noah Murdock</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+  <li><strong>Wyatt Olds</strong> (MLB) — Recalled by Boston Red Sox</li>
+  <li><strong>Jefry Yan</strong> (MLB) — Recalled by New York Mets</li>
+  <li><strong>Bobby Miller</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Cam Cauley</strong> (MLB) — Recalled by Texas Rangers</li>
+  <li><strong>Show SOON</strong> (MLB) — These 10 Top 100 prospects could be called up to The Show SOON - MLB.com</li>
+  <li><strong>Kyle Hart</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Michael Grove</strong> (MLB) — Recalled by Atlanta Braves</li>
+  <li><strong>Bradley Hanner</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Luis Gil</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Kyle Hurt</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+  <li><strong>Colton Gordon</strong> (MLB) — Recalled by Milwaukee Brewers</li>
+  <li><strong>Alex Cook</strong> (MLB) — Recalled by Tampa Bay Rays</li>
+  <li><strong>Brendan Beck</strong> (MLB) — Recalled by New York Yankees</li>
+  <li><strong>Owen Murphy</strong> (MLB) — Recalled by Atlanta Braves</li>
+  <li><strong>Danny Young</strong> (MLB) — Selected by Atlanta Braves</li>
+  <li><strong>Griffin Canning</strong> (MLB) — Recalled by San Diego Padres</li>
+  <li><strong>Drew Romo</strong> (MLB) — Recalled by Chicago White Sox</li>
+  <li><strong>Matthew Lugo</strong> (MLB) — Recalled by Kansas City Royals</li>
+  <li><strong>Seth Lonsway</strong> (MLB) — Recalled by San Francisco Giants</li>
+  <li><strong>Hunter Barco</strong> (MLB) — Recalled by Pittsburgh Pirates</li>
+</ul>
+
+<h2>💎 VALUE PICK OF THE WEEK</h2>
+<p><strong>2026 Panini Prizm FIFA World Cup Andrej Kramaric Mojo Auto #S-AK Croatia Soccer</strong> — <strong>$24.99</strong> (8 watchers)</p>
+
+<p>8 buyers already watching this one. Premium parallel, priced under most comparable comps in the active market.</p>
+
+<h2>🔦 SPOTLIGHT</h2>
+<p><strong>Chris Olave</strong> (NFL)</p>
+
+<p><em>This week:</em> on a hot streak (Stage (NO) - 116 receiving yds, 0 TD (ATL @ NO, Final)).</p>
+
+<h2>🔥 ITEMS ON FIRE — NEW THIS WEEK</h2>
+<ul>
+  <li>2024 Panini Select WWE Hulk Hogan #81 Black and Blue Prizm /399 Wrestling — $19.99</li>
+  <li>2026 Bowman Chrome Enyervert Perez RC Lava Refractor /399 BCP - 71 #BCP-71 — $14.83</li>
+  <li>2026 Topps Chrome Bundesliga UEFA Harry Kane #84 Pulasr Refractor Soccer — $13.31</li>
+  <li>2024 Panini Prizm Squishmallows Series 1 Dexter #30 Holo /199 Fantasy Squad — $12.58</li>
+  <li>2026 Topps Signature Class Bradley Beal #8 Magenta /250 Phoenix Suns — $11.71</li>
+  <li>1996 Topps Stadium Club Top Crop Karl Malone/Vin Baker RC #6 Milwaukee Bucks NBA — $11.31</li>
+</ul>
+
+<h2>👀 BUYERS ARE WATCHING</h2>
+<ul>
+  <li>1997 Skybox Marvel Metal Universe John Elway #8 — $133.09 (16 watchers)</li>
+  <li>2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare! — $164.99 (13 watchers)</li>
+  <li>2026 Topps Chrome Premier League Enzo Fernandez #MNL-9 Orange Prizm /25 — $67.00 (9 watchers)</li>
+  <li>2026 Bowman Baseball Colt Emerson Gold /50 Paper Auto #BPA-CE Mariners — $250.00 (8 watchers)</li>
+</ul>
+
+<h2>🏷️ SOLD THIS WEEK</h2>
+<ul>
+  <li>2024 Panini Hoops Rise 'N Shine Memorabilia NBA Bronny James Jr. RC #RSM-BJL — <strong>$18.10</strong></li>
+  <li>Jansel Luis 2025 Bowman Chrome Prospects #BCP-84 Steel Metal Auto /100 Arizona — <strong>$16.99</strong></li>
+  <li>2025-26 Topps UEFA Virgil van Dijk #79 Yellow Raindrops /299 Liverpool — <strong>$8.00</strong></li>
+  <li>2026 Panini Donruss Baseball Rated Prospect MLB George Lombard Jr. #158 — <strong>$6.47</strong></li>
+  <li>2026 Topps Flagship Football Flagship Real One Relic Colston Loveland #ROR-CL — <strong>$6.36</strong></li>
+</ul>
+
+<h2>📅 UPCOMING SPORTS EVENTS</h2>
+<ul>
+  <li><strong>2026-10-23</strong> (13d): 2026 World Series Game 1 [VERY_HIGH]</li>
+  <li><strong>2026-10-25</strong> (15d): 2026 Heritage Classic - Jets vs Canadiens (Winnipeg)</li>
+  <li><strong>2026-10-26</strong> (16d): World Series Game 1 (estimated) [HIGH]</li>
+  <li><strong>2026-10-30</strong> (20d): Ballon d'Or ceremony (estimated) [HIGH]</li>
+  <li><strong>2026-10-31</strong> (21d): 2026 World Series Game 7 (if necessary) [VERY_HIGH]</li>
+  <li><strong>2026-11-03</strong> (24d): MLB Rookie of the Year announcement (estimated) [HIGH]</li>
+  <li><strong>2026-11-04</strong> (25d): MLB Cy Young announcements (estimated) [HIGH]</li>
+  <li><strong>2026-11-05</strong> (26d): MLB MVP announcements (estimated) [HIGH]</li>
+</ul>
+
+<h2>🎴 UPCOMING CARD RELEASES</h2>
+<p>Big drops on the horizon — comp values for these sets tend to spike 7-14 days pre-release.</p>
+
+<ul>
+  <li><strong>2026-10-16</strong> (6d) — <strong>2026 Topps Update Series Baseball</strong>: 2026 Topps Update Series Baseball retail release</li>
+  <li><strong>2026-11-03</strong> (24d) — <strong>2026 Panini Mosaic Football</strong>: 2026 Panini Mosaic Football blaster release</li>
+  <li><strong>2026-11-08</strong> (29d) — <strong>Pokemon Surging Sparks</strong>: Pokemon TCG Surging Sparks Release</li>
+</ul>
+
+<h2>🎁 BUNDLE & SAVE</h2>
+<p>Buy more, save more: 5% off 2+ · 10% off 3+ · 15% off 4+.</p>
+
+<p>🔗 <a href="https://www.ebay.com/usr/tigerhawk-515">Browse the store</a></p>
+  <div class="footer">
+    You're reading the full edition of the Flyover Heat Weekly.
+    <br>Follow the store on eBay to receive the next one:
+    <a href="https://www.ebay.com/usr/tigerhawk-515">www.ebay.com/usr/tigerhawk-515</a><br>Or shop the same inventory direct: <a href="https://flyoverheat.myshopify.com">flyoverheat.myshopify.com</a>
+  </div>
+</body>
+</html>
