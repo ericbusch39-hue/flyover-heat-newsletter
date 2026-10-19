@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>THE FLYOVER HEAT WEEKLY</title>
+  <meta name="description" content="THE FLYOVER HEAT WEEKLY — Drop Zone empirical trading card market intelligence and pricing guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+/* Drop Zone / Flyover Heat public edition.
+   Palette and type follow webapp/static/arena.css -- the brand authority
+   (claude/aesthetic.md: violet accent, Bricolage display, Hanken body). A
+   reader who clicks through from eBay should land somewhere that looks like
+   the same company, not a default markdown dump. */
+:root {
+  --page-bg: #E7E9F3; --surface: #FFFFFF;
+  --text: #262A40; --text-strong: #0E1020; --text-muted: #4B5170;
+  --accent: #4133E0; --accent-deep: #3527C4; --accent-sub: #EEEDFE;
+  --border: #D8DBEA; --border-soft: #E6E8F2;
+  --hot: #98240F; --positive: #07583A;
+  --font-disp: 'Bricolage Grotesque', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0E1020; --surface: #191C30;
+    --text: #D6D9EA; --text-strong: #FFFFFF; --text-muted: #9AA0BE;
+    --accent: #8B7FF5; --accent-deep: #A79DF8; --accent-sub: #232640;
+    --border: #2E3252; --border-soft: #262A45;
+    --hot: #FF8A6B; --positive: #5FD3A3;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  max-width: 760px; margin: 0 auto; padding: 0 22px 64px;
+  line-height: 1.65; font-size: 16.5px;
+  color: var(--text); background: var(--page-bg);
+}
+
+/* ---- masthead ---- */
+.masthead {
+  margin: 0 -22px 34px; padding: 34px 22px 26px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff;
+}
+.masthead__inner { max-width: 760px; margin: 0 auto; }
+.masthead__kicker {
+  font: 600 11px var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  opacity: .78; margin: 0 0 8px;
+}
+.masthead__title {
+  font-family: var(--font-disp); font-size: clamp(30px, 6vw, 44px);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.02em; margin: 0;
+  color: #fff;
+}
+.masthead__date { margin: 12px 0 0; font-size: 14px; opacity: .85; }
+.masthead a { color: #fff; }
+
+/* ---- type ---- */
+h1 {
+  font-family: var(--font-disp); font-size: 30px; font-weight: 800;
+  line-height: 1.18; letter-spacing: -.015em; margin: 34px 0 14px;
+  color: var(--text-strong);
+}
+h2 {
+  font-family: var(--font-disp); font-size: 21px; font-weight: 700;
+  letter-spacing: -.01em; margin: 40px 0 14px; padding-bottom: 9px;
+  color: var(--text-strong); border-bottom: 2px solid var(--accent-sub);
+}
+h3 { font-family: var(--font-disp); font-size: 16.5px; font-weight: 700;
+     margin: 24px 0 8px; color: var(--text-strong); }
+p { margin: 14px 0; }
+strong { color: var(--text-strong); font-weight: 700; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 36px 0; }
+blockquote {
+  margin: 22px 0; padding: 16px 20px; background: var(--surface);
+  border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+  color: var(--text); font-size: 16px;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 22px; margin: 14px 0; }
+li { margin: 8px 0; }
+li::marker { color: var(--accent); }
+code { font: 500 13.5px ui-monospace, SFMono-Regular, Menlo, monospace;
+       background: var(--accent-sub); padding: 2px 6px; border-radius: 5px; }
+img { max-width: 100%; height: auto; border-radius: 10px; }
+
+a { color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+/* ---- tables ---- */
+.table-wrap { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+th, td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+th {
+  background: var(--accent-sub); font: 700 11.5px var(--font-body);
+  letter-spacing: .07em; text-transform: uppercase; color: var(--accent-deep);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-sub); }
+
+/* ---- bits ---- */
+.meta { color: var(--text-muted); font-size: 13.5px; margin: 0 0 22px; }
+.guide-nav {
+  font-size: 13.5px; font-weight: 600; margin-bottom: 26px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--border); color: var(--text-muted);
+}
+.guide-nav a { color: var(--accent); }
+.footer {
+  margin-top: 52px; padding: 22px 24px; font-size: 14px;
+  color: var(--text-muted); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px; line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; padding: 0 16px 48px; }
+  .masthead { margin: 0 -16px 26px; padding: 26px 16px 22px; }
+  th, td { padding: 9px 11px; }
+}
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="masthead__kicker">Weekly Edition</p>
+      <h1 class="masthead__title">Flyover Heat Weekly</h1>
+      <p class="masthead__date">October 19, 2026</p>
+    </div>
+  </header>
+  <h1>THE FLYOVER HEAT WEEKLY</h1>
+<h2>Oct 12 – Oct 19, 2026</h2>
+
+
+<p><em>Sports card market intelligence from the Flyover Heat store — hot players, market-moving injuries, accolades, trades, and what's selling.</em></p>
+
+<p><em>Every card you see here was photographed, identified, priced against live market comps and listed by <strong><a href="https://dropzonecards.com">Drop Zone Cards</a></strong>, our own card automation — the same system reads the week's sports news to build this newsletter. If you sell cards yourself and the listing grind is what's stopping you scaling, that's exactly what we built it for.</em></p>
+
+<h2>🗞️ THE HOBBY DESK — WHAT'S MOVING THE MARKET</h2>
+<p>*The week across the hobby. Sourced from public reporting — every item links to verify.*</p>
+
+<ul>
+  <li>2026 Topps Update Baseball dropped October 14, closing out Topps' 75th-anniversary flagship run: a 350-card checklist of in-season call-ups, rookies and players in new uniforms, with one autograph or relic per hobby box (about $130 at preorder). Update is where a lot of the year's true flagship rookie cards land, so the first two weeks of sales set the early price for every new name. If you chase rookies, this is the box that decides which ones the market believes in. — per <a href="https://cardlines.com/october-2026-card-release-preview-the-biggest-sports-and-tcg-products-to-watch/">Cardlines</a></li>
+</ul>
+
+<h2>🔥 HOT MOVES — PLAYERS WE HAVE</h2>
+<ul>
+  <li><strong>Jonathan Taylor</strong> — on a hot streak (Stage (IND) - 94 rushing yds, 1 TD (TEN @ IND, Final)). We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Jonathan+Taylor">$168.48 total</a>.</li>
+  <li><strong>Joe Burrow</strong> — on a hot streak (Stage (CIN) - 190 passing yds, 4 TD (CIN @ MIA, Final)). We have 8 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Joe+Burrow">$105.96 total</a>.</li>
+  <li><strong>Jayden Daniels</strong> — on a hot streak (Stage (WSH) - 103 rushing yds, 2 TD (NYG @ WSH, Final)). We have 15 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Jayden+Daniels">$89.50 total</a>.</li>
+  <li><strong>Kevin Durant</strong> — Rockets predicted to trade Kevin Durant for Knicks' $212M two-time NBA champion, draft capital - Yahoo Sports. We have 5 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Kevin+Durant">$61.25 total</a>.</li>
+  <li><strong>Anthony Edwards</strong> — RandBall: Anthony Edwards for NBA MVP? New-look Wolves give him a real chance. - Star Tribune. We have 7 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Anthony+Edwards">$48.38 total</a>.</li>
+  <li><strong>Brock Bowers</strong> — on a hot streak (Stage (LV) - 110 receiving yds, 1 TD (LV @ NE, Final)). We have 7 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Brock+Bowers">$33.45 total</a>.</li>
+  <li><strong>Hunter Henry</strong> — on a hot streak (Stage (NE) - 48 receiving yds, 1 TD (NYJ @ NE, Final)). We have 1 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Hunter+Henry">$29.97 total</a>.</li>
+  <li><strong>Drake Maye</strong> — on a hot streak (Stage (NE) - 235 passing yds, 3 TD (NYJ @ NE, Final)). We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Drake+Maye">$29.91 total</a>.</li>
+  <li><strong>A'ja Wilson</strong> — A’ja Wilson becomes first WNBA player to three-peat as MVP - AFRO News. We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=A'ja+Wilson">$29.13 total</a>.</li>
+  <li><strong>Colston Loveland</strong> — on a hot streak (Stage (CHI) - 65 receiving yds, 1 TD (CHI @ ATL, Final)). We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Colston+Loveland">$26.71 total</a>.</li>
+</ul>
+
+<h2>🎯 HEAT SEEKING — COMING SOON</h2>
+<p>Players gaining momentum across the leagues we cover. We're actively acquiring singles — watch the store.</p>
+
+<ul>
+  <li><strong>Tyler Shough</strong> (NFL) — on a hot streak (Stage (NO) - 144 passing yds, 3 TD (NO @ NYG, Final))</li>
+  <li><strong>C.J. Stroud</strong> (NFL) — on a hot streak (Stage (HOU) - 312 passing yds, 3 TD (HOU VS JAX, Final))</li>
+  <li><strong>Davante Adams</strong> (NFL) — on a hot streak (Stage (LAR) - 51 receiving yds, 2 TD (BUF @ LAR, Final))</li>
+  <li><strong>Drake London</strong> (NFL) — on a hot streak (Stage (ATL) - 118 receiving yds, 0 TD (BAL @ ATL, Final))</li>
+  <li><strong>Jahmyr Gibbs</strong> (NFL) — on a hot streak (Stage (DET) - 151 rushing yds, 2 TD (DET @ ARI, Final))</li>
+  <li><strong>Jordan Love</strong> (NFL) — on a hot streak (Stage (GB) - 367 passing yds, 2 TD (CHI @ GB, Final))</li>
+  <li><strong>Jared Goff</strong> (NFL) — on a hot streak (Stage (DET) - 271 passing yds, 3 TD (DET @ ARI, Final))</li>
+  <li><strong>In Minors</strong> (NHL) — Devils Recall Former Senators First-Round Pick After Brief Stint In Minors - The Hockey News</li>
+</ul>
+
+<h2>🌡️ THE WEEK BY SPORT</h2>
+<p>Where the action was, by event count:</p>
+
+<ul>
+  <li><strong>GENERAL</strong>: 106 events</li>
+  <li><strong>NFL</strong>: 85 events</li>
+  <li><strong>MLB</strong>: 26 events</li>
+  <li><strong>NBA</strong>: 25 events</li>
+  <li><strong>NHL</strong>: 17 events</li>
+  <li><strong>WNBA</strong>: 5 events</li>
+  <li><strong>HOBBY</strong>: 1 events</li>
+  <li><strong>UCL</strong>: 1 events</li>
+</ul>
+
+<h2>🏆 AWARDS, CHAMPIONSHIPS & MILESTONES</h2>
+<ul>
+  <li><strong>Anthony Edwards</strong> (NBA) — RandBall: Anthony Edwards for NBA MVP? New-look Wolves give him a real chance. - Star Tribune</li>
+  <li><strong>Hunter Henry</strong> (GENERAL) — NFLPA names Hunter Henry their Community MVP for Week 6</li>
+  <li><strong>A'ja Wilson</strong> (WNBA) — A’ja Wilson becomes first WNBA player to three-peat as MVP - AFRO News</li>
+  <li><strong>Drake Maye</strong> (NFL) — Is Drake Maye back to his MVP form? + Bust that $#!% Up! | NFL Live - ESPN</li>
+  <li><strong>Paolo Banchero</strong> (NBA) — Magic's Paolo Banchero wins NBA Rookie of the Year award - ESPN</li>
+  <li><strong>LeBron James</strong> (GENERAL) — thought OG Anunoby deserved the Finals MVP award over Jalen Brunson</li>
+  <li><strong>Matthew Stafford</strong> (NFL) — NFL MVP tracker, Week 6: Diving into Matthew Stafford's start to season; Brock Purdy still No. 1 - NFL.com</li>
+  <li><strong>Marvin Harrison Jr</strong> (GENERAL) — vs. Marvin Harrison Sr. stats: How Hall of Fame dad's slow start compares to son in Year 2</li>
+  <li><strong>Cole Young</strong> (MLB) — Mariners Second Baseman Cole Young Named American League Gold Glove Finalist - MLB.com</li>
+  <li><strong>Puka Nacua</strong> (GENERAL) — breaks NFL record for most catches through 50 games</li>
+</ul>
+
+<h2>🏥 INJURIES — MARKET MOVERS</h2>
+<p>Significant injuries the market should weigh. Watch for short-term card-value dips.</p>
+
+<ul>
+  <li><strong>Jayden Daniels</strong> (NFL) — Doctors fear risk of further Jayden Daniels elbow injury - ESPN</li>
+  <li><strong>Ladd McConkey</strong> (NFL) — NFL Week 6 inactives, injury tracker: Chargers' Ladd McConkey ruled out with concussion - CBS Sports</li>
+  <li><strong>Tyreek Hill</strong> (GENERAL) — What's next for Tyreek Hill? A suspension, NFL return or both?</li>
+  <li><strong>TreVeyon Henderson</strong> (GENERAL) — 's ankle injury update comes with a surprising twist</li>
+  <li><strong>Lamar Jackson</strong> (NFL) — NFL Week 6 injury report: Lamar Jackson, Jalen Hurts sidelined; Caleb Williams could return - CBS Sports</li>
+  <li><strong>David Montgomery</strong> (NFL) — NFL Week 6 inactives, injury tracker: Texans' David Montgomery is inactive - CBS Sports</li>
+</ul>
+
+<h2>🔁 TRADES & SIGNINGS</h2>
+<ul>
+  <li><strong>Cason Wallace</strong> (NBA, SIGNING) — Thunder, Cason Wallace reportedly beat deadline, agree to 5-year, $139M contract extension - Yahoo Sports</li>
+  <li><strong>Marvin Harrison Jr</strong> (NFL, TRADE) — Rapoport: Marvin Harrison Jr. traded to Texans for two 2027 draft picks | 'GMFB' - NFL.com</li>
+  <li><strong>Cade Cunningham</strong> (NBA, TRADE) — Pistons predicted to trade for Lakers' $180M beloved combo guard to pair with Cade Cunningham - Sporting News</li>
+  <li><strong>Karl-Anthony Towns</strong> (NBA, SIGNING) — Knicks suspend contract extension talks for Karl-Anthony Towns, Josh Hart 'until later in the season' - Yahoo Sports</li>
+  <li><strong>Angel Reese</strong> (WNBA, TRADE) — From stunning Angel Reese trade to expansion ingenuity: How Dream, Valkyries broke the mold to reach Finals - CBS Sports</li>
+  <li><strong>Oso Ighodaro</strong> (NBA, SIGNING) — Suns agree to a three-year contract extension - HoopsHype</li>
+  <li><strong>James Harden</strong> (NBA, SIGNING) — agrees to 3-year, $97M deal to remain with Cavaliers - ESPN</li>
+  <li><strong>Ausar Thompson</strong> (NBA, SIGNING) — signs 5-year, $155 million rookie-scale extension with Pistons - NBA.com</li>
+</ul>
+
+<h2>🆕 CALLUPS, DRAFT & DEBUTS</h2>
+<ul>
+  <li><strong>Most Likely</strong> (NBA) — Top 2025 NBA Draft Picks Most Likely to Have a Breakout Year Two - Sports Illustrated</li>
+  <li><strong>Arch Manning</strong> (NFL) — Could returning to Texas for 2027 finally make Arch Manning a top-five NFL Draft pick? - CBS Sports</li>
+  <li><strong>Pick Suddenly</strong> (NHL) — Penguins Former First-Round Pick Suddenly Named Trade Candidate - The Hockey News</li>
+  <li><strong>In Minors</strong> (NHL) — Devils Recall Former Senators First-Round Pick After Brief Stint In Minors - The Hockey News</li>
+  <li><strong>Fernando Mendoza</strong> (NFL) — Raiders' Fernando Mendoza makes NFL debut: A look at how No. 1 overall pick performed - CBS Sports</li>
+  <li><strong>Acquire Former First-Round</strong> (NHL) — Penguins Complete Trade With Sabres To Acquire Former First-Round Pick - The Hockey News</li>
+  <li><strong>Pick Signs With</strong> (NHL) — Former Blackhawks First-Round Pick Signs With Geneve-Servette - Yahoo Sports</li>
+  <li><strong>Emmet Sheehan</strong> (MLB) — Recalled by Los Angeles Dodgers</li>
+</ul>
+
+<h2>💎 VALUE PICK OF THE WEEK</h2>
+<p><strong>2025 Panini WNBA Select Saniya Rivers RC Prizm Courtside #224 Connecticut Sun</strong> — <strong>$14.24</strong> (11 watchers)</p>
+
+<p>11 buyers already watching this one. Rookie card + premium parallel, priced under most comparable comps in the active market.</p>
+
+<h2>🔦 SPOTLIGHT</h2>
+<p><strong>Tyler Shough</strong> (NFL)</p>
+
+<p><em>This week:</em> on a hot streak (Stage (NO) - 144 passing yds, 3 TD (NO @ NYG, Final)).</p>
+
+<h2>👀 BUYERS ARE WATCHING</h2>
+<ul>
+  <li>1997 Skybox Marvel Metal Universe John Elway #8 Denver Broncos NFL Football — $113.13 (17 watchers)</li>
+  <li>2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare! — $140.24 (13 watchers)</li>
+  <li>2007 Fleer Ultra Lucky13 Kevin Durant RC #232 Seattle SuperSonics Basketball NBA — $41.79 (11 watchers)</li>
+  <li>2026 Topps Chrome Premier League Enzo Fernandez #MNL-9 Orange Prizm /25 Soccer — $54.99 (9 watchers)</li>
+</ul>
+
+<h2>🏷️ SOLD THIS WEEK</h2>
+<ul>
+  <li>1997 Fleer Metal Fresh Foundations Allen Iverson RC #236 Basketball Rainbow Foil — <strong>$30.80</strong></li>
+  <li>1996 Fleer Metal Allen Iverson RC #201 Basketball Philadelphia 76ers Holo Foil — <strong>$27.00</strong></li>
+  <li>1995 Fleer Metal NBA Shaquille O'Neal #78 Orlando Magic Basketball — <strong>$13.71</strong></li>
+  <li>2025-26 Bowman Chrome U COEN CARR Burgundy MOJO REFR. /275 MICHIGAN STATE U — <strong>$11.00</strong></li>
+  <li>2026 Panini Prizm Rickey Henderson #34 Purple Pulsar 068/135 Oakland Athletics — <strong>$9.99</strong></li>
+</ul>
+
+<h2>📅 UPCOMING SPORTS EVENTS</h2>
+<ul>
+  <li><strong>2026-10-23</strong> (4d): 2026 World Series Game 1 [VERY_HIGH]</li>
+  <li><strong>2026-10-25</strong> (6d): 2026 Heritage Classic - Jets vs Canadiens (Winnipeg)</li>
+  <li><strong>2026-10-31</strong> (12d): 2026 World Series Game 7 (if necessary) [VERY_HIGH]</li>
+  <li><strong>2026-11-03</strong> (15d): MLB Rookie of the Year announcement (estimated) [HIGH]</li>
+  <li><strong>2026-11-04</strong> (16d): MLB Cy Young announcements (estimated) [HIGH]</li>
+  <li><strong>2026-11-05</strong> (17d): MLB MVP announcements (estimated) [HIGH]</li>
+</ul>
+
+<h2>🎴 UPCOMING CARD RELEASES</h2>
+<p>Big drops on the horizon — comp values for these sets tend to spike 7-14 days pre-release.</p>
+
+<ul>
+  <li><strong>2026-11-03</strong> (15d) — <strong>2026 Panini Mosaic Football</strong>: 2026 Panini Mosaic Football blaster release</li>
+  <li><strong>2026-11-08</strong> (20d) — <strong>Pokemon Surging Sparks</strong>: Pokemon TCG Surging Sparks Release</li>
+</ul>
+
+<p>🔗 <a href="https://www.ebay.com/usr/tigerhawk-515">Browse the store</a></p>
+  <div class="footer">
+    You're reading the full edition of the Flyover Heat Weekly.
+    <br>Follow the store on eBay to receive the next one:
+    <a href="https://www.ebay.com/usr/tigerhawk-515">www.ebay.com/usr/tigerhawk-515</a><br>Or shop the same inventory direct: <a href="https://flyoverheat.myshopify.com">flyoverheat.myshopify.com</a>
+  </div>
+</body>
+</html>
