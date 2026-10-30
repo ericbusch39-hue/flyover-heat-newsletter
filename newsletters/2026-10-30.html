@@ -117,6 +117,29 @@ tbody tr:hover td { background: var(--accent-sub); }
   border-bottom: 1px solid var(--border); color: var(--text-muted);
 }
 .guide-nav a { color: var(--accent); }
+
+/* ---- our cards, as tiles (2026-10-30: same shape as the Drop Zone
+   inventory card -- photo, title, price -- each one a link to the listing) ---- */
+.nl-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px; margin: 8px 0 22px;
+}
+.nl-card {
+  display: flex; flex-direction: column; text-decoration: none; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.nl-card:hover { border-color: var(--accent); }
+.nl-card__img {
+  aspect-ratio: 1 / 1; background: var(--accent-sub) center / contain no-repeat;
+}
+.nl-card__name {
+  padding: 8px 10px 2px; font-size: 13px; line-height: 1.35; color: var(--text-strong);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.nl-card__price {
+  padding: 2px 10px 10px; margin-top: auto; font-weight: 800; color: var(--accent);
+}
 .footer {
   margin-top: 52px; padding: 22px 24px; font-size: 14px;
   color: var(--text-muted); background: var(--surface);
@@ -155,17 +178,45 @@ tbody tr:hover td { background: var(--accent-sub); }
 
 <h2>🔥 HOT MOVES — PLAYERS WE HAVE</h2>
 <ul>
-  <li><strong>Colt Emerson</strong> — Mariners top prospect Colt Emerson makes MLB debut - ESPN. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Colt+Emerson">$234.60 total</a>.</li>
-  <li><strong>Jonathan Taylor</strong> — on a hot streak (Stage (IND) - 95 rushing yds, 1 TD (IND @ MIN, Final)). We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Jonathan+Taylor">$168.48 total</a>.</li>
-  <li><strong>Joe Burrow</strong> — Week 8 NFL MVP tracker: Joe Burrow, Jared Goff, Caleb Williams on verge of crashing race - NFL.com. We have 7 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Joe+Burrow">$102.01 total</a>.</li>
-  <li><strong>Bam Adebayo</strong> — Heat predicted to trade Bam Adebayo for $220M veteran NBA champion, six-time All-Star - Yahoo Sports. We have 2 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Bam+Adebayo">$95.86 total</a>.</li>
-  <li><strong>J.J. McCarthy</strong> — Former NFL MVP sends warning to Giants over J.J. McCarthy starting decision - Yahoo Sports. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=J.J.+McCarthy">$72.28 total</a>.</li>
-  <li><strong>Lamine Yamal</strong> — Fabrizio Romano names surprise favourite to beat Lamine Yamal to Ballon d'Or award - DAZN. We have 4 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Lamine+Yamal">$44.83 total</a>.</li>
-  <li><strong>Giannis Antetokounmpo</strong> — Heat predicted to trade for $134M 2-time NBA champion, All-Star to pair with Giannis Antetokounmpo - Yahoo Sports. We have 9 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Giannis+Antetokounmpo">$40.50 total</a>.</li>
-  <li><strong>Drake Maye</strong> — on a hot streak (Stage (NE) - 321 passing yds, 2 TD (NE @ CHI, Final)). We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Drake+Maye">$32.73 total</a>.</li>
-  <li><strong>Lamine Yamal Ballon</strong> — 【WATCHLIVE]FREE+️!!FREE+️Lamine Yamal Ballon d'Or 2026 Live Free Champions League Soccer Game October 27, 2026 - NYC Health + Hospitals. We have 3 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Lamine+Yamal+Ballon">$28.02 total</a>.</li>
-  <li><strong>Bo Nix</strong> — on a hot streak (Stage (DEN) - 73 rushing yds, 1 TD (DEN @ ARI, Final)). We have 5 listing(s) <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Bo+Nix">$27.96 total</a>.</li>
+  <li><strong>Jonathan Taylor</strong> — on a hot streak (Stage (IND) - 95 rushing yds, 1 TD (IND @ MIN, Final)). We have 2 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Jonathan+Taylor">shop them all</a>.</li>
 </ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318698153629"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/bz8AAeSwMm1qLqZz/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2020 Metal Draft Touchdown Kings Jonathan Taylor Red Auto #TK - JT1/2 Football</div><div class="nl-card__price">$164.99</div></a><a class="nl-card" href="https://www.ebay.com/itm/318914344583"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/APkAAeSw8sxqtasn/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Jonathan Taylor red 2025 Panini Score Football NFL #89 Indianapolis Colts</div><div class="nl-card__price">$3.49</div></a></div>
+<ul>
+  <li><strong>Joe Burrow</strong> — on a hot streak (Stage (CIN) - 292 passing yds, 4 TD (CIN @ BAL, Final)). We have 7 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Joe+Burrow">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318248985184"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTA5OVgxMDk5/z/YYEAAeSw2NJqRV4W/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Donruss Elite Joe Burrow #81 Razzle Dazzle Cincinnati Bengals</div><div class="nl-card__price">$54.99</div></a><a class="nl-card" href="https://www.ebay.com/itm/318288647067"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTUwM1gxNTAz/z/xcQAAeSwa4hqScFk/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Joe Burrow Fortune 15 XFractor Insert Bengals Mega SP 2025 Topps Chrome #F15-5</div><div class="nl-card__price">$14.57</div></a><a class="nl-card" href="https://www.ebay.com/itm/318124668837"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTExOFgxMTE4/z/omUAAeSw1PxqkUXL/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Phoenix Joe Burrow #30 Silver Lava Cincinnati Bengals</div><div class="nl-card__price">$9.44</div></a></div>
+<ul>
+  <li><strong>Bo Nix</strong> — on a hot streak (Stage (DEN) - 73 rushing yds, 1 TD (DEN @ ARI, Final)). We have 5 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Bo+Nix">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/860000897692"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/l5UAAeSwG55q4BGD/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Select Football Bo Nix RC Black Blue Prizm #117 Denver Broncos NFL</div><div class="nl-card__price">$9.30</div></a><a class="nl-card" href="https://www.ebay.com/itm/318718929356"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/Wc4AAeSwBCJqfIOf/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Topps Signature Class Gridiron Ambassadors NFL Bo Nix RC #GA-4 Football</div><div class="nl-card__price">$7.03</div></a><a class="nl-card" href="https://www.ebay.com/itm/318560458754"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/26YAAeSwS0Fpuhs~/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Prizm Emergent Bo Nix RC #3 Green Wave Prizm Denver Broncos</div><div class="nl-card__price">$5.98</div></a></div>
+<ul>
+  <li><strong>Ja'Marr Chase</strong> — on a hot streak (Stage (CIN) - 62 receiving yds, 1 TD (CIN @ BAL, Final)). We have 3 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Ja'Marr+Chase">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318561078573"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxMDc1/z/8LAAAeSwo5JpYo6t/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Phoenix Ja&#x27;marr Chase Purple Laser #93 /99</div><div class="nl-card__price">$12.79</div></a><a class="nl-card" href="https://www.ebay.com/itm/318408731598"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxMTYz/z/0RYAAeSwWP1pYoqh/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Phoenix Ja&#x27;Marr Chase Purple Winter /199 #93 Cincinnati Bengals NFL</div><div class="nl-card__price">$6.84</div></a><a class="nl-card" href="https://www.ebay.com/itm/318668763210"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/XUkAAeSwgblqb5Fq/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Topps Resurgence Circuit Breakers NFL Ja&#x27;Marr Chase #CB-1 Football</div><div class="nl-card__price">$3.30</div></a></div>
+<ul>
+  <li><strong>Ashton Jeanty</strong> — on a hot streak (Stage (LV) - 61 receiving yds, 1 TD (LAR @ LV, Final)). We have 4 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Ashton+Jeanty">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318408699385"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTEyMFgxMTIw/z/pVoAAeSw0Bpqk5Je/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Ashton Jeanty RC 2025 Select Future Raiders Rookie</div><div class="nl-card__price">$6.41</div></a><a class="nl-card" href="https://www.ebay.com/itm/318389045761"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTMwM1gxMzAz/z/oIEAAeSwHWVqSB0t/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Mosaic Ashton Jeanty Silver Mosaic Prizm Image Variation (RC) Rookie</div><div class="nl-card__price">$5.75</div></a><a class="nl-card" href="https://www.ebay.com/itm/318399235392"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTE1NVgxMTU1/z/v2AAAeSwWg9qlmOc/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Panini 2025 Donruss Optic Hidden Potential Ashton Jeanty #5 Rookie Raiders</div><div class="nl-card__price">$3.49</div></a></div>
+<ul>
+  <li><strong>Tee Higgins</strong> — on a hot streak (Stage (CIN) - 148 receiving yds, 1 TD (CIN @ BAL, Final)). We have 2 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Tee+Higgins">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318883052129"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/3V0AAeSw8n5qPZyQ/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Rookies &amp; Stars Tee Higgins Orange #22 Cincinnati Bengals /249</div><div class="nl-card__price">$10.15</div></a><a class="nl-card" href="https://www.ebay.com/itm/318664784661"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/s4MAAeSwRTtqbkLI/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Tee Higgins RC White Disco 2025 Panini Prizm Football #13 Cincinnati Bengals</div><div class="nl-card__price">$6.31</div></a></div>
+<ul>
+  <li><strong>Michael Penix Jr.</strong> — on a hot streak (Stage (ATL) - 213 passing yds, 3 TD (SF @ ATL, Final)). We have 3 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Michael+Penix+Jr.">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/860029723604"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/sCUAAeSw2RBqdK08/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Topps Resurgence Michael Penix Jr. #4 Atlanta Falcons Football</div><div class="nl-card__price">$8.31</div></a><a class="nl-card" href="https://www.ebay.com/itm/318806678342"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/FZcAAeSwR8JqlhL4/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Prizm Draft Picks NFL Michael Penix Jr. RC #101 Red Cracked Ice</div><div class="nl-card__price">$6.62</div></a><a class="nl-card" href="https://www.ebay.com/itm/860002003248"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/ENEAAeSwCilqwAUb/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Illusions Football NFL Michael Penix Jr. RC #9 Illusionists Emerald</div><div class="nl-card__price">$6.17</div></a></div>
+<ul>
+  <li><strong>Marvin Harrison Jr.</strong> — on a hot streak (Stage (HOU) - 6 receiving yds, 1 TD (NYG @ HOU, Final)). We have 2 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Marvin+Harrison+Jr.">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318454784655"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/sJcAAeSw02pq4A6N/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Marvin Harrison Jr 2024 Totally Certified Franchise Foundations Purple /199 #17</div><div class="nl-card__price">$9.99</div></a><a class="nl-card" href="https://www.ebay.com/itm/318914336266"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/BMYAAeSw6sNqtalB/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Totally Certified Portraits NFL Marvin Harrison Jr. RC #6 Portrait</div><div class="nl-card__price">$2.75</div></a></div>
+<ul>
+  <li><strong>Matthew Stafford</strong> — on a hot streak (Stage (LAR) - 195 passing yds, 3 TD (LAR @ LV, Final)). We have 3 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Matthew+Stafford">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318840715751"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/O0UAAeSwFu9qnz~6/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2016 Panini Absolute Air Raid NFL Matthew Stafford #9 /100</div><div class="nl-card__price">$11.89</div></a><a class="nl-card" href="https://www.ebay.com/itm/318559026850"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/OTIzWDY3OA==/z/ST4AAeSw8kxp1yIi/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Matthew Stafford Elite Aspirations Red Explosions Parallel #76 /999</div><div class="nl-card__price">$7.31</div></a><a class="nl-card" href="https://www.ebay.com/itm/318560477989"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/ue8AAeSwJzZq4A7Z/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Donruss Optic Matthew Stafford #198 Holo Prizm Los Angeles Rams</div><div class="nl-card__price">$4.07</div></a></div>
+<ul>
+  <li><strong>Blake Corum</strong> — on a hot streak (Stage (LAR) - 93 rushing yds, 1 TD (LAR @ LV, Final)). We have 2 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Blake+Corum">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318406761587"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/16kAAeSw1BFq4A5i/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Prizm Draft Picks Blake Corum Fearless RC Holo Prizm #F-BC Michigan</div><div class="nl-card__price">$8.83</div></a><a class="nl-card" href="https://www.ebay.com/itm/318724466249"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/XYUAAeSw64Zqfe7F/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Blake Corum 2024 Panini Contenders Football Rookie Ticket Swatches #RTS-BCM</div><div class="nl-card__price">$3.49</div></a></div>
 
 <h2>🎯 HEAT SEEKING — COMING SOON</h2>
 <p>Players gaining momentum across the leagues we cover. We're actively acquiring singles — watch the store.</p>
@@ -176,91 +227,64 @@ tbody tr:hover td { background: var(--accent-sub); }
   <li><strong>Jahmyr Gibbs</strong> (NFL) — on a hot streak (Stage (DET) - 116 rushing yds, 0 TD (GB @ DET, Final))</li>
   <li><strong>Amon-Ra St. Brown</strong> (NFL) — on a hot streak (Stage (DET) - 153 receiving yds, 0 TD (GB @ DET, Final))</li>
   <li><strong>Jared Goff</strong> (NFL) — on a hot streak (Stage (DET) - 303 passing yds, 2 TD (GB @ DET, Final))</li>
-  <li><strong>Start Stroud</strong> (NFL) — What to know for Week 7: Start Stroud, one WR to trade for and one to trade away - ESPN</li>
-  <li><strong>Cooper Flagg</strong> (NBA) — signs 1-of-1 rookie debut patch Topps card - ESPN</li>
   <li><strong>Christian Watson</strong> (NFL) — on a hot streak (Stage (GB) - 113 receiving yds, 0 TD (CAR @ GB, Final))</li>
+  <li><strong>Jaylen Warren</strong> (NFL) — on a hot streak (Stage (PIT) - 101 rushing yds, 0 TD (PIT VS NO, Final))</li>
+  <li><strong>KC Concepcion</strong> (NFL) — on a hot streak (Stage (CLE) - 129 receiving yds, 0 TD (CLE @ TEN, Final))</li>
 </ul>
 
 <h2>🌡️ THE WEEK BY SPORT</h2>
 <p>Where the action was, by event count:</p>
 
 <ul>
-  <li><strong>GENERAL</strong>: 105 events</li>
-  <li><strong>NFL</strong>: 73 events</li>
-  <li><strong>NBA</strong>: 36 events</li>
-  <li><strong>MLB</strong>: 19 events</li>
-  <li><strong>NHL</strong>: 14 events</li>
-  <li><strong>WNBA</strong>: 5 events</li>
-  <li><strong>SOCCER</strong>: 4 events</li>
-  <li><strong>HOBBY</strong>: 3 events</li>
+  <li><strong>NFL</strong>: 66 events</li>
+  <li><strong>NBA</strong>: 14 events</li>
+  <li><strong>MLB</strong>: 13 events</li>
+  <li><strong>NHL</strong>: 7 events</li>
+  <li><strong>WNBA</strong>: 2 events</li>
   <li><strong>PREMIER</strong>: 1 events</li>
+  <li><strong>SOCCER</strong>: 1 events</li>
   <li><strong>WORLDCUP</strong>: 1 events</li>
 </ul>
 
 <h2>🏆 AWARDS, CHAMPIONSHIPS & MILESTONES</h2>
 <ul>
-  <li><strong>Luka Doncic</strong> (NBA) — NBA one-week overreactions: Luka Dončić as the MVP frontrunner? Who's in the most trouble? - CBS Sports</li>
-  <li><strong>Joe Burrow</strong> (NFL) — Week 8 NFL MVP tracker: Joe Burrow, Jared Goff, Caleb Williams on verge of crashing race - NFL.com</li>
-  <li><strong>Bam Adebayo</strong> (NBA) — Heat predicted to trade Bam Adebayo for $220M veteran NBA champion, six-time All-Star - Yahoo Sports</li>
-  <li><strong>J.J. McCarthy</strong> (NFL) — Former NFL MVP sends warning to Giants over J.J. McCarthy starting decision - Yahoo Sports</li>
-  <li><strong>Lamine Yamal</strong> (SOCCER) — Fabrizio Romano names surprise favourite to beat Lamine Yamal to Ballon d'Or award - DAZN</li>
-  <li><strong>Giannis Antetokounmpo</strong> (NBA) — Heat predicted to trade for $134M 2-time NBA champion, All-Star to pair with Giannis Antetokounmpo - Yahoo Sports</li>
-  <li><strong>Giannis Antetokounmpo</strong> (NBA) — Heat predicted to trade for $118M veteran NBA champion to pair with Giannis Antetokounmpo - Yahoo Sports</li>
-  <li><strong>Lamine Yamal Ballon</strong> (SOCCER) — 【WATCHLIVE]FREE+️!!FREE+️Lamine Yamal Ballon d'Or 2026 Live Free Champions League Soccer Game October 27, 2026 - NYC Health + Hospitals</li>
-  <li><strong>Dalton Knecht</strong> (NBA) — Signs With NBA Champion Knicks Following Lakers Cut - LA Sports Report</li>
-  <li><strong>Paolo Banchero</strong> (NBA) — Magic's Paolo Banchero wins NBA Rookie of the Year award - ESPN</li>
+  <li><strong>Angel Reese</strong> (WNBA) — <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNS1lYbFJpWEdGaWJoN1MxbGM3cWVXa3RZTk84NmVibUNoRzhxZmNkN083ZUZ2MEVXaXNOQzdIbHdYbGRuQ2JMSmdJRzdQanF3N2FKNEtwM3dPZFJFYk5adDZPQWd1MDljMExiT1JmZ1JBVW5qM3hjdmp0Z0NWR2dGYlBsa29oc2NVQVM3ekpidXpLd1ZOZ0x2RzVCbw?oc=5">WNBA Finals MVP rankings: Angel Reese, Gabby Williams lead the way ahead of Game 5 in tied series - CBS Sports</a></li>
+  <li><strong>Christian Yelich</strong> (MLB) — <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxOYWxxNzZZSGFzX3dVQ2l5UDRWY054MnByQ2tVNUlPbTdLaFZvLUpIRkFjcktEVkRqRVJsY0hvMFQ1N1RUQVVpbmFZNi14S190RG9xVG84NldkOEQ2cE9zREVJbkFrV2dTYndFM0pBSzA0Q1dBaHF5N2Jwbm5ReDhlVw?oc=5">on being a World Series champion - MLB.com</a></li>
+  <li><strong>Michael Vick</strong> (NFL) — <a href="https://www.espn.com/fantasy/football/story/_/id/50322041/fantasy-football-hall-fame-michael-vick">iconic MNF game is now in the ESPN Fantasy Football Hall of Fame</a></li>
+  <li><strong>William Contreras</strong> (MLB) — <a href="https://www.espn.com/mlb/story/_/id/50314424/brewers-william-contreras-earns-world-series-mvp-honors">Brewers' William Contreras eighth catcher to earn World Series MVP honors</a></li>
 </ul>
 
 <h2>🏥 INJURIES — MARKET MOVERS</h2>
 <p>Significant injuries the market should weigh. Watch for short-term card-value dips.</p>
 
 <ul>
-  <li><strong>Anthony Edwards</strong> (NBA) — needs procedure on right knee, will miss several weeks - NBA.com</li>
-  <li><strong>Jalen Hurts Went</strong> (NFL) — 36 Hours Without Sleep on Doctors’ Orders Before Season-Ending Blood Clot Diagnosis - Yahoo Sports</li>
-  <li><strong>Jaren Jackson Jr</strong> (NBA) — out six weeks with MCL tear, Lauri Markkanen day-to-day with wrist sprain - NBA.com</li>
-  <li><strong>David Montgomery</strong> (NFL) — NFL Week 7 inactives, injury tracker: Texans' David Montgomery and Jets' Breece Hall inactive - CBS Sports</li>
-  <li><strong>Tyrese Haliburton</strong> (NBA) — becomes latest injured NBA star: Pacers guard will miss time with hamstring strain - CBS Sports</li>
-  <li><strong>Myles Garrett</strong> (NFL) — Injury Update, Latest on Rams Star's Timeline to Return to Practice After Surgery - Bleacher Report</li>
+  <li><strong>Anthony Edwards</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQQXplNVZ2Zlk5V1kyTjhzZFdXa0FpZnFrY0gxLTVFc0U4VFRZaDNFMGhjdFNKNFdoMFA2R3U1MkpXa0FaRHRpR1NRT0dPbTJodUdSbk1GQjl5ZnNfY0hORWFVR1BIa3VSVHhNRGtERTBVYzdGZHo5QkxJeTVLdy00bTRSZnBZODF6RzRqcHE0U2pUWk9ITklSZ3VydWcyYmt0WUttWWFYa0hXNEtoS0dWMG1jUkpCbFpZM2c?oc=5">needs procedure on right knee, will miss several weeks - NBA.com</a></li>
+  <li><strong>Ja Morant</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQQnFlZjh4UUhWRDZaMER3Q0JfS0cwZFJqaC1XUFdoaTAtQ0FTSnpWdDAzVHlaNGdNUG93MzYwWWJLTHVkOGQwSXVPVHdiMXU1SmdMX1J0czhwZ28zQ0d6YlkzcERveG42dDYtanBzSzBMV1NqanJoOFhmYzRTSmYyWDZsMVd5djlfYmRONXNhM0hKZ0o5bFQydFlwOXRsakUzTGdfLS1iN0E4UkVvbWczSFZRREVsMUg0dEF1WFZtRTY?oc=5">Chris Haynes reports how long Ja Morant will be out with his hamstring injury - Basketball Network</a></li>
+  <li><strong>Jaren Jackson Jr</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE0yWE1JX0VyMlRlMGhmYXZGeTVReU1kc09MWHpBUXg4eXBmOXg0ZC14Q19OcV85TnlCUFlEdjJzRnd4TTRwX2RIX1NjaFk2WkcwYmctRnJBd1QzRXo4SnpXd0M3bzRhcTlIQkl3d25Sek0?oc=5">out six weeks with MCL tear, Lauri Markkanen day-to-day with wrist sprain - NBA.com</a></li>
+  <li><strong>David Montgomery</strong> (NFL) — <a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxNLUNLQkhiTEZMTFExOFl6UUNZRlZ6YjRfMVU2dXpTZlJRbUZmTjlid3JkTXJZbk52R3djQ0NNQ3JEcXB2X29aLVEwMUlTQTVHZ3g5ZEFuaHVKTG5yZjIwOHppQXhaV0pDRGFkUUhYSTMxcTZtZmJfT0xBcF82SDg5RHdMbmJwVGhwb1dHdlpKUm1TZW1fNkZ0cjc0MG8?oc=5">NFL Week 7 inactives, injury tracker: Texans' David Montgomery and Jets' Breece Hall inactive - CBS Sports</a></li>
+  <li><strong>Tyrese Haliburton</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxPSkNpdHR2NXFNeXNjRUNRbWZYVVV1UkdZVEdQa1dTeWIzMzFEdzVfR3ZHalU3SG5qMl91WTU4dGlCRkRDWGJtS1k0LXItMzNUaVpNQ1Vlbkc5SjhGTURueW5YMXlydzYtdEhCZ3lQTlJIWXBTdU5LOXBURDFKaV9oTDctdnRGSUQxSDlB?oc=5">becomes latest injured NBA star: Pacers guard will miss time with hamstring strain - CBS Sports</a></li>
+  <li><strong>Puka Nacua</strong> (NFL) — <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNMFlCZDNjUjlUMWE5TWlUNWJFcG14Q1ZuT3U2c0E0Q25JR2xaUEpRZmNuZ29QUWM4SW1CWnd2TlphRU5xM2NvVW8wRnVwVlR5UzIwWGg0bXJ0Y0xXREphSHRYdHB0c3N2OVh5OWJKcjBEaHBrel9od1Z5WWVfVHJ0UUQwYUZvMnNaMzJBb1NBZlNLZkxhSFUyN0pB?oc=5">Rapoport: Puka Nacua left practice on Thursday with calf injury | 'GMFB' - NFL.com</a></li>
 </ul>
 
 <h2>🔁 TRADES & SIGNINGS</h2>
 <ul>
-  <li><strong>Dalton Knecht</strong> (NBA, SIGNING) — ‘Getting a ring before Luka ‘ - NBA Fans excited for Dalton Knecht as he signs two-way contract with New York Knicks - Yahoo</li>
-  <li><strong>Cason Wallace</strong> (NBA, SIGNING) — Agrees to Five-Year Contract Extension With Oklahoma City Thunder - Nation of Blue</li>
-  <li><strong>Walter Clayton</strong> (NBA, SIGNING) — Signs Two-Way Deal With Mavs - Hoops Rumors</li>
-  <li><strong>Alexander Nikishin</strong> (GENERAL, TRADE) — Signs For One Year</li>
-  <li><strong>RBs Saquon Barkley</strong> (GENERAL, TRADE) — NFL trade deadline: 4 players we want to see dealt to ideal landing spots include RBs Saquon Barkley and Jonathan Taylor</li>
-  <li><strong>Saquon Barkley</strong> (NFL, TRADE) — trade rumors: Should the Seahawks trade for the Eagles' running back? - CBS Sports</li>
-  <li><strong>James Harden</strong> (NBA, SIGNING) — agrees to 3-year, $97M deal to remain with Cavaliers - ESPN</li>
-  <li><strong>Brandon Miller Contract</strong> (NBA, SIGNING) — Extension: Hornets Lock In $209 Million Deal - Yahoo Sports</li>
+  <li><strong>Jeffery Simmons</strong> (NFL, TRADE) — <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPQkZrcFJaVmNFak9lVDJhYXZwWkN2U0lDVXFkcmtnVWtlbFJlZGY3c01GclZteHhuY25NWXMwd2dZczMtRzJOUWI3bkM1RDZYU0YzTFpENHVWN0EydW0xdGI5Vm9peC1pZjJLVW5zdGhSWWlHdjZpRHlGLXY3TVY0RjJVbkpsUdIBiwFBVV95cUxNVHVRNko0LXZ2dFJFTjMwU25fOU1fSl9JbEFMSUduelBGVnAwdTgwMlJUUXZwS0p0M3JxazlvN0M3b0ZSX2J4YU9JMVBvWGlBSWtiMnZlMnZjN25jVVJ6cjMzSG83eWhNTjRkYWJQTldXZHYwTXYxbUZONmJ5a2ZWY3owcjBsRlNfSk5B?oc=5">traded to Bears - FantasyPros</a></li>
+  <li><strong>Ben Williamson</strong> (MLB, SIGNING) — <a href="https://news.google.com/rss/articles/CBMiowJBVV95cUxQRGdFTlVCaTI4TURpNG5fVm1mcWZuOHhxYXNuLVlPRERXU0J4MTNLWGZUNVVsTXNBdXJnc1V2bFNCQjdsYU5oeTFJRHJQNUxSc0VKbG1uMW83YzNkTjJ5ckFtUnJ2djRpUGJnWTRWb0dqS2QwS2NSSGpod1NqZ0J5d19TajEwNW5kRl96SHRNWC1CNThsRzg2SW5yVEhNQTZtQ1pKRFU1VDJrUXNJRDhsT05GR0xPbk1DbzhvU29JLUtmT0k2Q2I2enJSUjF1YU5fVWtvZkh1dTRYaE1QLWl1Y3NUclFnYWtIRDYwUHI4T3ZvMWNSLUlPckUyb1B0VXNYc1REc2cyeTFoMTVHQXJ6ajFhZGhmdmxpckdvT0MzeWVJMEU?oc=5">World Series 2026: With pinch-hit, 12th-inning walk-off, Ben Williamson meets the moment in Game 4 and extends the Rays' season at least one more day - Yahoo Sports</a></li>
 </ul>
 
 <h2>🆕 CALLUPS, DRAFT & DEBUTS</h2>
 <ul>
-  <li><strong>Dalton Knecht</strong> (NBA) — signs with Knicks, per report: Could ex-Lakers first-round pick find role in New York? - CBS Sports</li>
-  <li><strong>DeForest Buckner</strong> (NFL) — Traded to 49ers from Colts, Latest News on Deal for NFL Draft Pick - Bleacher Report</li>
-  <li><strong>Most Likely</strong> (NBA) — Top 2025 NBA Draft Picks Most Likely to Have a Breakout Year Two - Sports Illustrated</li>
-  <li><strong>First-Round Pick</strong> (NBA) — Mavericks Bring 2025 First-Round Pick on Board Before Season Opener, Why and How Does He Fit? - Yahoo Sports</li>
-  <li><strong>Recognition After Powerful</strong> (MLB) — Angels Third-Round Pick Earns MLB Pipeline Recognition After Powerful Debut - roundtable.io</li>
-  <li><strong>Akheem Mesidor</strong> (NFL) — How Chargers' 2026 first-round pick Akheem Mesidor is faring so far</li>
-  <li><strong>Quenton Nelson</strong> (NFL) — Colts trade G Quenton Nelson to Seattle Seahawks for 2 future NFL Draft picks - Colts.com</li>
-  <li><strong>Gavin McKenna</strong> (NHL) — Kraken outlast Maple Leafs 5-4 to spoil No. 1 overall pick Gavin McKenna’s big game</li>
-  <li><strong>Million Decision That</strong> (NBA) — Knicks Plan $5.37 Million Decision That Puts Former First-Round Pick’s Future in Question - Heavy.com</li>
-  <li><strong>High-Reward Shot</strong> (NHL) — Detroit Could Take Low-Risk, High-Reward Shot at Former First Round Pick Reportedly Available - Yahoo Sports</li>
-  <li><strong>Finds New Landing</strong> (NBA) — 2022 Top 10 NBA Draft Pick Finds New Landing Spot While Thunder Open Two-Way By Waiving 2nd-Round Pick - Yahoo Sports</li>
-  <li><strong>Colt Emerson</strong> (MLB) — Mariners top prospect Colt Emerson makes MLB debut - ESPN</li>
-  <li><strong>Khristian Curtis Overcomes</strong> (MLB) — Pirates Top Prospects No. 11: Khristian Curtis Overcomes Adversity to Make MLB Debut - Yahoo Sports</li>
-  <li><strong>Make Big Change</strong> (MLB) — Cardinals Urged to Make Big Change for Pitching Prospect Nearing MLB Debut - Yahoo Sports</li>
-  <li><strong>Walker Jenkins</strong> (MLB) — Twins' top prospect, singles in MLB debut - ESPN</li>
-  <li><strong>LHP Sears</strong> (MLB) — Tigers call up No. 14 prospect LHP Sears for MLB debut - MLB.com</li>
-  <li><strong>BJ Murray Jr</strong> (MLB) — Cubs call up their No. 19 prospect BJ Murray Jr. for MLB debut vs. Brewers - MLB.com</li>
-  <li><strong>A's No</strong> (MLB) — 5 prospect Bolte makes immediate impact in MLB debut to remember - MLB.com</li>
-  <li><strong>Show SOON</strong> (MLB) — These 10 Top 100 prospects could be called up to The Show SOON - MLB.com</li>
-  <li><strong>Max Clark</strong> (MLB) — Tigers prospect Max Clark records 3 hits, RBI in MLB debut - ESPN</li>
+  <li><strong>DeForest Buckner</strong> (NFL) — <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOU2hoMUdFTDc2Q0NkZ3hNU3dTR2hRcnpyUHctUDBnUkJCVEZwV1VfZmRjdVdPMHdXTWVUaWl6eHF4VUVQYnJnZmNwaFE1X0NENG1KQmJybHJhSm9xcFNIc0tOQVB0NDdoV3J4ZHJHa2hXRnVuX015ZjE0VzViMlhBbW90UjgxNTBoanRqNkdfbk1Ubi1oeHE0NXBrMnVoeW5YWmppSkMxZ2xNNXd1T3oxbURR?oc=5">Traded to 49ers from Colts, Latest News on Deal for NFL Draft Pick - Bleacher Report</a></li>
+  <li><strong>Gavin McKenna</strong> (NHL) — <a href="http://www.espn.com/nhl/recap?gameId=401892599">Kraken outlast Maple Leafs 5-4 to spoil No. 1 overall pick Gavin McKenna’s big game</a></li>
+  <li><strong>Quenton Nelson</strong> (NFL) — <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxOWnFKNkZKY194cmlpWjJjNno3OFRoS3ZRYmhaUXhXYklFVTZCT2tHVG5lSTA3VjFkaFdHWjNmTi1UNDQ5enQ2cVA0MXg5VXhrZDdLOUdsc2IyNGhqcjVFLWVpTEtxN2lCdGk0N01yZ1hFVFBPNHVHNHVuVzBYZDVHOVBFR3lmQVVXdjNTZkNVSW1QN19EUzZWcEVocWJVMXMyMGZQWjdwdw?oc=5">Colts trade G Quenton Nelson to Seattle Seahawks for 2 future NFL Draft picks - Colts.com</a></li>
+  <li><strong>Akheem Mesidor</strong> (NFL) — <a href="https://www.espn.com/nfl/story/_/id/50278837/los-angeles-chargers-akheem-mesidor-2026-performance">How Chargers' 2026 first-round pick Akheem Mesidor is faring so far</a></li>
+  <li><strong>Nicolo Pinazzi</strong> (MLB) — Selected by Los Angeles Angels</li>
+  <li><strong>Milan Tolentino</strong> (MLB) — Selected by Cleveland Guardians</li>
 </ul>
 
 <h2>💎 VALUE PICK OF THE WEEK</h2>
 <p><strong>2016 Panini Absolute Football Rook Ink Jarran Reed RC Auto /150 #21 Seahawks</strong> — <strong>$14.69</strong> (8 watchers)</p>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318840722561"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/wF8AAeSwFu5qn0Fc/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2016 Panini Absolute Football Rook Ink Jarran Reed RC Auto /150 #21 Seahawks</div><div class="nl-card__price">$14.69</div></a></div>
 
 <p>8 buyers already watching this one. Rookie card + serial-numbered, priced under most comparable comps in the active market.</p>
 
@@ -270,26 +294,18 @@ tbody tr:hover td { background: var(--accent-sub); }
 <p><em>This week:</em> on a hot streak (Stage (GB) - 288 passing yds, 3 TD (CAR @ GB, Final)).</p>
 
 <h2>🔥 ITEMS ON FIRE — NEW THIS WEEK</h2>
-<ul>
-  <li>2025 Panini Stars and Stripes Jonathan Santucci Throwback Auto #AS-JS USA — $12.99</li>
-  <li>2024 Panini Prizm Draft Picks J.J. McCarthy RC #SO-JJM Red Cracked Ice Football — $10.00</li>
-</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/860091172618"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/zYUAAeSwAPhq4ZDq/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Stars and Stripes Jonathan Santucci Throwback Auto #AS-JS USA</div><div class="nl-card__price">$12.99</div></a><a class="nl-card" href="https://www.ebay.com/itm/860091172417"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/0cgAAeSw8bFq4ZDd/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Prizm Draft Picks J.J. McCarthy RC #SO-JJM Red Cracked Ice Football</div><div class="nl-card__price">$10.00</div></a></div>
 
 <h2>👀 BUYERS ARE WATCHING</h2>
-<ul>
-  <li>1997 Skybox Marvel Metal Universe John Elway #8 Denver Broncos NFL Football — $113.13 (22 watchers)</li>
-  <li>2007 Fleer Ultra Lucky13 Kevin Durant RC #232 Seattle SuperSonics Basketball NBA — $41.79 (13 watchers)</li>
-  <li>2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare! — $140.24 (13 watchers)</li>
-  <li>2026 Topps Chrome Premier League Enzo Fernandez #MNL-9 Orange Prizm /25 Soccer — $54.99 (10 watchers)</li>
-</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318802146754"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/SNMAAeSwWaNqlMtG/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">1997 Skybox Marvel Metal Universe John Elway #8 Denver Broncos NFL Football</div><div class="nl-card__price">$113.13</div></a><a class="nl-card" href="https://www.ebay.com/itm/318744163386"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/O~4AAeSwMk1qgx7U/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2007 Fleer Ultra Lucky13 Kevin Durant RC #232 Seattle SuperSonics Basketball NBA</div><div class="nl-card__price">$41.79</div></a><a class="nl-card" href="https://www.ebay.com/itm/318432294818"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTUxMlgxNTEy/z/VfgAAeSwYoFqRG6r/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare!</div><div class="nl-card__price">$140.24</div></a><a class="nl-card" href="https://www.ebay.com/itm/318081942376"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxMTc4/z/E3EAAeSwQKxpysda/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2026 Topps Chrome Premier League Enzo Fernandez #MNL-9 Orange Prizm /25 Soccer</div><div class="nl-card__price">$54.99</div></a></div>
 
 <h2>🏷️ SOLD THIS WEEK</h2>
 <ul>
+  <li>2024 Panini Prizm Draft Picks - Rated Prospect Darius Acuff Jr. #7 Purple Wave — <strong>$16.99</strong></li>
   <li>2025 Select Signatures Blake Cashman #SP-BCN Silver Prizm Minnesota Vikings — <strong>$16.17</strong></li>
   <li>2025 Panini Prizm Matthew Golden RC #326 Silver Prizm /35 Green Bay Packers — <strong>$14.00</strong></li>
   <li>2026 Topps Signature Class NFL Monroe Freeling RC #355 Gold Holofoil /50 Rookie — <strong>$12.50</strong></li>
-  <li>2026 Topps Holiday Yoshinobu Yamamoto Green Metallic Holly #H134 LA Dodgers MLB — <strong>$3.49</strong></li>
-  <li>2025 Topps Resurgence NFL Gunnar Helm RC #196 Yellow Surge /225 Tennessee Titans — <strong>$3.49</strong></li>
+  <li>2026 Topps Baseball Major League Material Nick Kurtz #MLM2-NK Oakland Athletics — <strong>$6.85</strong></li>
 </ul>
 
 <h2>📅 UPCOMING SPORTS EVENTS</h2>
