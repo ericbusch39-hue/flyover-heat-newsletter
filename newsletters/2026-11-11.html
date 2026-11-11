@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>THE FLYOVER HEAT WEEKLY</title>
+  <meta name="description" content="THE FLYOVER HEAT WEEKLY — Drop Zone empirical trading card market intelligence and pricing guide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+/* Drop Zone / Flyover Heat public edition.
+   Palette and type follow webapp/static/arena.css -- the brand authority
+   (claude/aesthetic.md: violet accent, Bricolage display, Hanken body). A
+   reader who clicks through from eBay should land somewhere that looks like
+   the same company, not a default markdown dump. */
+:root {
+  --page-bg: #E7E9F3; --surface: #FFFFFF;
+  --text: #262A40; --text-strong: #0E1020; --text-muted: #4B5170;
+  --accent: #4133E0; --accent-deep: #3527C4; --accent-sub: #EEEDFE;
+  --border: #D8DBEA; --border-soft: #E6E8F2;
+  --hot: #98240F; --positive: #07583A;
+  --font-disp: 'Bricolage Grotesque', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0E1020; --surface: #191C30;
+    --text: #D6D9EA; --text-strong: #FFFFFF; --text-muted: #9AA0BE;
+    --accent: #8B7FF5; --accent-deep: #A79DF8; --accent-sub: #232640;
+    --border: #2E3252; --border-soft: #262A45;
+    --hot: #FF8A6B; --positive: #5FD3A3;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  max-width: 760px; margin: 0 auto; padding: 0 22px 64px;
+  line-height: 1.65; font-size: 16.5px;
+  color: var(--text); background: var(--page-bg);
+}
+
+/* ---- masthead ---- */
+.masthead {
+  margin: 0 -22px 34px; padding: 34px 22px 26px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff;
+}
+.masthead__inner { max-width: 760px; margin: 0 auto; }
+.masthead__kicker {
+  font: 600 11px var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  opacity: .78; margin: 0 0 8px;
+}
+.masthead__title {
+  font-family: var(--font-disp); font-size: clamp(30px, 6vw, 44px);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.02em; margin: 0;
+  color: #fff;
+}
+.masthead__date { margin: 12px 0 0; font-size: 14px; opacity: .85; }
+.masthead a { color: #fff; }
+
+/* ---- type ---- */
+h1 {
+  font-family: var(--font-disp); font-size: 30px; font-weight: 800;
+  line-height: 1.18; letter-spacing: -.015em; margin: 34px 0 14px;
+  color: var(--text-strong);
+}
+h2 {
+  font-family: var(--font-disp); font-size: 21px; font-weight: 700;
+  letter-spacing: -.01em; margin: 40px 0 14px; padding-bottom: 9px;
+  color: var(--text-strong); border-bottom: 2px solid var(--accent-sub);
+}
+h3 { font-family: var(--font-disp); font-size: 16.5px; font-weight: 700;
+     margin: 24px 0 8px; color: var(--text-strong); }
+p { margin: 14px 0; }
+strong { color: var(--text-strong); font-weight: 700; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 36px 0; }
+blockquote {
+  margin: 22px 0; padding: 16px 20px; background: var(--surface);
+  border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+  color: var(--text); font-size: 16px;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 22px; margin: 14px 0; }
+li { margin: 8px 0; }
+li::marker { color: var(--accent); }
+code { font: 500 13.5px ui-monospace, SFMono-Regular, Menlo, monospace;
+       background: var(--accent-sub); padding: 2px 6px; border-radius: 5px; }
+img { max-width: 100%; height: auto; border-radius: 10px; }
+
+a { color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+/* ---- tables ---- */
+.table-wrap { overflow-x: auto; margin: 22px 0; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+th, td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border-soft); }
+th {
+  background: var(--accent-sub); font: 700 11.5px var(--font-body);
+  letter-spacing: .07em; text-transform: uppercase; color: var(--accent-deep);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--accent-sub); }
+
+/* ---- bits ---- */
+.meta { color: var(--text-muted); font-size: 13.5px; margin: 0 0 22px; }
+.guide-nav {
+  font-size: 13.5px; font-weight: 600; margin-bottom: 26px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--border); color: var(--text-muted);
+}
+.guide-nav a { color: var(--accent); }
+
+/* ---- our cards, as tiles (2026-10-30: same shape as the Drop Zone
+   inventory card -- photo, title, price -- each one a link to the listing) ---- */
+.nl-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px; margin: 8px 0 22px;
+}
+.nl-card {
+  display: flex; flex-direction: column; text-decoration: none; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.nl-card:hover { border-color: var(--accent); }
+.nl-card__img {
+  aspect-ratio: 1 / 1; background: var(--accent-sub) center / contain no-repeat;
+}
+.nl-card__name {
+  padding: 8px 10px 2px; font-size: 13px; line-height: 1.35; color: var(--text-strong);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.nl-card__price {
+  padding: 2px 10px 10px; margin-top: auto; font-weight: 800; color: var(--accent);
+}
+.footer {
+  margin-top: 52px; padding: 22px 24px; font-size: 14px;
+  color: var(--text-muted); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px; line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; padding: 0 16px 48px; }
+  .masthead { margin: 0 -16px 26px; padding: 26px 16px 22px; }
+  th, td { padding: 9px 11px; }
+}
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="masthead__kicker">Weekly Edition</p>
+      <h1 class="masthead__title">Flyover Heat Weekly</h1>
+      <p class="masthead__date">November 11, 2026</p>
+    </div>
+  </header>
+  <h1>THE FLYOVER HEAT WEEKLY</h1>
+<h2>Nov 04 – Nov 11, 2026</h2>
+
+
+<p><em>Sports card market intelligence from the Flyover Heat store — hot players, market-moving injuries, accolades, trades, and what's selling.</em></p>
+
+<p><em>Every card you see here was photographed, identified, priced against live market comps and listed by <strong><a href="https://dropzonecards.com">Drop Zone Cards</a></strong>, our own card automation — the same system reads the week's sports news to build this newsletter. If you sell cards yourself and the listing grind is what's stopping you scaling, that's exactly what we built it for.</em></p>
+
+<h2>🗞️ THE HOBBY DESK — WHAT'S MOVING THE MARKET</h2>
+<p>*The week across the hobby. Sourced from public reporting — every item links to verify.*</p>
+
+<ul>
+  <li>NBA rookie report card: grading this season’s top picks so far — per <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9KQTB3QkZvVE94dUYxUWFMZlhNc1o5bC0wZVIybW5aT0ZQMG5ON2R6X25wd0FEaGdRUXl0Q3hVbklpczh5UHN4aGVia3lEMEk3bFVZ?oc=5">شبكة تواصل الإخبارية</a></li>
+</ul>
+
+<h2>🔥 HOT MOVES — PLAYERS WE HAVE</h2>
+<ul>
+  <li><strong>Joe Burrow</strong> — on a hot streak (271 passing yds, 3 TD (CIN VS ATL, Final)). We have 6 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Joe+Burrow">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318248985184"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTA5OVgxMDk5/z/YYEAAeSw2NJqRV4W/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Donruss Elite Joe Burrow #81 Razzle Dazzle Cincinnati Bengals</div><div class="nl-card__price">$47.15</div></a><a class="nl-card" href="https://www.ebay.com/itm/318288647067"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTUwM1gxNTAz/z/xcQAAeSwa4hqScFk/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Joe Burrow Fortune 15 XFractor Insert Bengals Mega SP 2025 Topps Chrome #F15-5</div><div class="nl-card__price">$14.57</div></a><a class="nl-card" href="https://www.ebay.com/itm/318124668837"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTExOFgxMTE4/z/omUAAeSw1PxqkUXL/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Phoenix Joe Burrow #30 Silver Lava Cincinnati Bengals</div><div class="nl-card__price">$9.44</div></a></div>
+<ul>
+  <li><strong>Bronny James</strong> — <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNdU43cVhtd2xKMGt1dnVkWDZnTE12MTlIN2YtNno0bVFETkUtRmwwNnZnYTVFbkF6VU1pYnZzWlNOQkV0OTlLeWs0Q0MtcmhrZUpxQlZ1Qzd4aU5EeXNXbFktdDJJaE05YlhDSFItLTVSX3dBMURROXlnTjNlTzhlaC1STVRhZVBhUXVBRU9BUVk5ZXRkY0ZHMQ?oc=5">Lakers' Bronny James: Recalled to NBA - CBS Sports</a>. We have 9 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Bronny+James">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318543258780"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/MSEAAeSw5XRqSX6p/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Topps Finest Bronny James Jr. RC #43 light blue Refractor</div><div class="nl-card__price">$7.92</div></a><a class="nl-card" href="https://www.ebay.com/itm/318660374048"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/2mMAAeSwKR9q4A-H/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Mosaic Bronny James Jr. RC #214 Reactive Blue Los Angeles Lakers</div><div class="nl-card__price">$6.81</div></a><a class="nl-card" href="https://www.ebay.com/itm/318750561468"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/04oAAeSw0HxqhNDh/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Topps Flagship Bronny James Jr. RC Black Friday Foil #152 Lakers Basketball</div><div class="nl-card__price">$4.30</div></a></div>
+<ul>
+  <li><strong>Brock Bowers</strong> — on a hot streak (111 receiving yds, 1 TD (LV @ SF, Final)). We have 8 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Brock+Bowers">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318716155713"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/3CgAAeSwXI1qe9TX/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Totally Certified Brock Bowers RC Mirror Purple #109 Raiders NFL</div><div class="nl-card__price">$10.36</div></a><a class="nl-card" href="https://www.ebay.com/itm/860126065864"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/Fy4AAeSwCq9q8QcP/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Illusions Illusionists NFL Brock Bowers RC #7 Las Vegas Raiders</div><div class="nl-card__price">$7.99</div></a><a class="nl-card" href="https://www.ebay.com/itm/318674084814"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/qE0AAeSwRTtqcS7y/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Revolution Football Brock Bowers Swirl #13 Las Vegas Raiders NFL</div><div class="nl-card__price">$7.31</div></a></div>
+<ul>
+  <li><strong>Drake Maye</strong> — on a hot streak (299 passing yds, 3 TD (GB @ NE, Final)). We have 3 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Drake+Maye">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318744310058"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/rqwAAeSwiCJqgyyJ/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Topps Chrome Drake Maye RC Finesse Lazer #F-2 New England Patriots Football</div><div class="nl-card__price">$17.12</div></a><a class="nl-card" href="https://www.ebay.com/itm/318239203761"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTUzMVgxNTMx/z/SCIAAeSw2rZqkgm6/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Select Concourse Drake Maye Patriots #80 Black &amp; Green Prizm</div><div class="nl-card__price">$5.94</div></a><a class="nl-card" href="https://www.ebay.com/itm/318741010319"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/ISAAAeSwR-FqgleE/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Drake Maye 2025 Panini Mosaic Football Notoriety 2nd Edition NFL #3</div><div class="nl-card__price">$5.01</div></a></div>
+<ul>
+  <li><strong>Ja'Marr Chase</strong> — on a hot streak (155 receiving yds, 1 TD (CIN VS ATL, Final)). We have 3 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Ja'Marr+Chase">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318561078573"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxMDc1/z/8LAAAeSwo5JpYo6t/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Phoenix Ja&#x27;marr Chase Purple Laser #93 /99</div><div class="nl-card__price">$12.79</div></a><a class="nl-card" href="https://www.ebay.com/itm/318408731598"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxMTYz/z/0RYAAeSwWP1pYoqh/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Phoenix Ja&#x27;Marr Chase Purple Winter /199 #93 Cincinnati Bengals NFL</div><div class="nl-card__price">$6.84</div></a><a class="nl-card" href="https://www.ebay.com/itm/318668763210"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/XUkAAeSwgblqb5Fq/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Topps Resurgence Circuit Breakers NFL Ja&#x27;Marr Chase #CB-1 Football</div><div class="nl-card__price">$3.49</div></a></div>
+<ul>
+  <li><strong>Sarah Strong</strong> — <a href="https://sports.yahoo.com/womens-college-basketball/article/sarah-strong-explodes-with-career-high-39-points-to-lead-no-2-uconn-over-no-10-iowa-221128895.html">explodes with career-high 39 points to lead No. 2 UConn over No. 10 Iowa</a>. We have 4 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Sarah+Strong">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318924699895"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/rhUAAeSwZl5qW-pw/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Sarah Strong Fast Break 2024-25 Panini Contenders NIL College Ticket #28</div><div class="nl-card__price">$9.24</div></a><a class="nl-card" href="https://www.ebay.com/itm/318746230880"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/I0IAAeSw131qg7Ap/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Topps Chrome McDonald&#x27;S All American Sarah Strong #60 Raywave Refractor</div><div class="nl-card__price">$7.03</div></a><a class="nl-card" href="https://www.ebay.com/itm/318914290079"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/kA4AAeSwcS9qtaT1/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Sarah Strong RC VIP-5 UConn NCAA Rookie 2025 Topps Bowman Chrome Basketball</div><div class="nl-card__price">$3.49</div></a></div>
+<ul>
+  <li><strong>Tee Higgins</strong> — on a hot streak (32 receiving yds, 2 TD (CIN VS ATL, Final)). We have 2 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Tee+Higgins">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318883052129"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/3V0AAeSw8n5qPZyQ/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Rookies &amp; Stars Tee Higgins Orange #22 Cincinnati Bengals /249</div><div class="nl-card__price">$10.15</div></a><a class="nl-card" href="https://www.ebay.com/itm/318664784661"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/s4MAAeSwRTtqbkLI/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Tee Higgins RC White Disco 2025 Panini Prizm Football #13 Cincinnati Bengals</div><div class="nl-card__price">$6.31</div></a></div>
+<ul>
+  <li><strong>Luther Burden III</strong> — on a hot streak (97 receiving yds, 1 TD (TB @ CHI, Final)). We have 3 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Luther+Burden+III">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318322473500"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTM5NlgxMzk2/z/hxcAAeSwU21qdO~8/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Panini Mosaic Luther Burden III Yellow Reactive Rookie (RC) #383 Bears</div><div class="nl-card__price">$4.22</div></a><a class="nl-card" href="https://www.ebay.com/itm/318211618104"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTA5MVgxMDkx/z/uC4AAeSwMcdqk1nC/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">Luther Burden III RC 2025 Select Futures #3 Rookie</div><div class="nl-card__price">$3.49</div></a></div>
+<ul>
+  <li><strong>Harry Kane</strong> — <a href="https://www.espn.com/soccer/story/<em>/id/50442704/harry-kane-ballon-dor-england-tottenham-hotspur-bayern-munich">How Harry Kane rose to win Ballon d'Or and become an England legend</a>. We have 1 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?</em>nkw=Harry+Kane">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/860011470366"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/vn4AAeSwxkhqe5tp/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2026 Topps Chrome Bundesliga UEFA Harry Kane #84 Pulasr Refractor Soccer</div><div class="nl-card__price">$11.51</div></a></div>
+<ul>
+  <li><strong>Puka Nacua</strong> — on a hot streak (150 receiving yds, 1 TD (LAR @ WSH, Final)). We have 1 listing(s) — <a href="https://www.ebay.com/sch/tigerhawk-515/m.html?_nkw=Puka+Nacua">shop them all</a>.</li>
+</ul>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318481588643"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/-ikAAeSwcLlqNowt/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025 Score Football Puka Nacua Teal Stars #120/299</div><div class="nl-card__price">$10.89</div></a></div>
+
+<h2>🎯 HEAT SEEKING — COMING SOON</h2>
+<p>Players gaining momentum across the leagues we cover. We're actively acquiring singles — watch the store.</p>
+
+<ul>
+  <li><strong>Auston Matthews</strong> (NHL) — on a hot streak (20 games, 11G / 17A / 28P (1.40 P/G))</li>
+  <li><strong>Connor McDavid</strong> (NHL) — on a hot streak (19 games, 11G / 37A / 48P (2.53 P/G))</li>
+  <li><strong>CeeDee Lamb</strong> (NFL) — on a hot streak (195 receiving yds, 1 TD (DAL @ IND, Final))</li>
+  <li><strong>Bucky Irving</strong> (NFL) — on a hot streak (97 rushing yds, 2 TD (TB @ CHI, Final))</li>
+  <li><strong>Jordan Love</strong> (NFL) — on a hot streak (372 passing yds, 3 TD (GB @ NE, Final))</li>
+  <li><strong>C.J. Stroud</strong> (NFL) — on a hot streak (384 passing yds, 5 TD (HOU @ LAC, Final))</li>
+  <li><strong>Robert Stock</strong> (MLB) — <a href="https://www.espn.com/mlb/story/_/id/50403894/new-york-mets-re-sign-pitcher-robert-stock-one-year-deal">Mets re-sign pitcher Robert Stock, 36, to one-year contract</a></li>
+  <li><strong>DeMario Douglas</strong> (NFL) — on a hot streak (102 receiving yds, 0 TD (GB @ NE, Final))</li>
+</ul>
+
+<h2>🌡️ THE WEEK BY SPORT</h2>
+<p>Where the action was, by event count:</p>
+
+<ul>
+  <li><strong>NFL</strong>: 62 events</li>
+  <li><strong>NBA</strong>: 16 events</li>
+  <li><strong>MLB</strong>: 8 events</li>
+  <li><strong>WNBA</strong>: 6 events</li>
+  <li><strong>NHL</strong>: 5 events</li>
+  <li><strong>SOCCER</strong>: 4 events</li>
+</ul>
+
+<h2>🏆 AWARDS, CHAMPIONSHIPS & MILESTONES</h2>
+<ul>
+  <li><strong>Gabby Williams</strong> (WNBA) — <a href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxPbmF1Vm5oVTV3TEhpZElGZWNJQlluN0hJQXhDNmUxbG9pMzJ5azBJUmNDUDJPaWFlR0NTRHJVMFNDQy14Q2NwNGVNQko1SnI2bFV6NEI4Y1NQQnhaM3QyWjlDXzVPenpSbmFhS3l4M0QwMHRmVXBPcXJmb2hyRGdTTWhyU003eWlrbTl0ZlRiMWVOSkpxa1phWHExdXBNWjc2T2R6ZkpNLW5GQU1TOEh0amE4TGRxVDI5NEhLMVZCZ0ZNeWZSVUlhd0VtTF95UWt1MlhyakVZeGpYZnctbVN3VGd3?oc=5">'Reading Rainbow' Legend LeVar Burton Has a Special Message for WNBA Finals MVP Gabby Williams - EssentiallySports</a></li>
+  <li><strong>Diana Taurasi</strong> (WNBA) — <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQUFNaM2ZuVEtOTDZoYlBucEZqTGo4WUNWVVdhX0JiaEdCWDBNeEE3U2J6UEtPSDVPSE1VMUNTclJzWFA3NHVINGhUT3JUSUVmV1BGVnNKRkptRy1ZLVEwT3JzdDBYVm1CUXg4WmdvRVJMUTBjM1lSWC0yZXA1SmJaZkZ2UXV0d0VLaUxveG5GZlE4dklaeTJyUWxEY2JLLUhCT1J4XzI5MGdZQ0VDakJhd09qNXN5ay0zOHhKRTh3YnN2Zw?oc=5">UConn great Diana Taurasi will join Women's Basketball Hall of Fame - CT Insider</a></li>
+</ul>
+
+<h2>🏥 INJURIES — MARKET MOVERS</h2>
+<p>Significant injuries the market should weigh. Watch for short-term card-value dips.</p>
+
+<ul>
+  <li><strong>Puka Nacua</strong> (NFL) — <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxQeG5wbkRkM3k3N0dFS0gwRVRhazREQkZzdmJ0SVZwcjR1bmp1N3AwbFFxU0FzekR6ems5SldMZnpMd1VuTFBQWVJrOE1vdWlObUExb2dxNkkwRGJfeGt6RzNmUkUzdHRZaGYxbTM3ZHVpS0JSYzBFdlNJU0ZpM2tGR1cySi1nbnhSekpMOG5zWmVQLUw4N2NWQkZR?oc=5">NFL news, live updates, trade deadline rumors: Puka Nacua likely headed to IR with knee injury; Gardner Minshew feared to have torn UCL in throwing arm; Jaguars trade for Jordan Davis, Jessie Bates III, Davon Godchaux - Yahoo Sports</a></li>
+  <li><strong>Sam Darnold</strong> (NFL) — <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNVGtCa1lHY3N3X2dHVzdBMWRieDZtekFIZnFDVXd6ZmZiNnB0LVBFVTVEQzRCdG9Lb29udUozNmdmdG02YXpzaFdOV05BR2NoRllHcWQxZTVPdkxkWm5yZUV5WFp1enNyRlBNNzM0REdxQTd5VW1WMEZXMTNHa3BOYklZc0YwMERJdzZWSDVCU3dIU2RPb2VFQXRpb0p5dXI3eUtZaG5tRlE?oc=5">Seahawks QB Sam Darnold Out For Sunday’s Game vs. Arizona Due To Quad Injury - Seattle Seahawks</a></li>
+  <li><strong>Kon Knueppel</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQOEdGNW85X29oS1BLUngybXRNRlpiSVVEZnBKREUyLW9RTThFX3c3MFBzNXN0OWxOcjZ5LUVmenhvQzhtazVoTnFScHZURWJCVjZ3OVE5MmNiX0p5YjRsZmEwV01yWTF2UUJ0UjV6RzVLalhMQXkxRjgzc1JUYV9xdXJWYnZvcHJUZzlOUUUxc2F0bXlRNHg0NV9yUU83WlZ0N1NNUW54eUJYaktCSnJVZlhlY1ppZUduOEpaUTBqZW5yZ1RUSU5BV3lLR1N4UXJIa2wzYw?oc=5">Hornets' Kon Knueppel to make season debut Wednesday vs. Nets following hamstring injury - Yahoo Sports</a></li>
+</ul>
+
+<h2>🔁 TRADES & SIGNINGS</h2>
+<ul>
+  <li><strong>Kate Martin</strong> (WNBA, SIGNING) — <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPY1dZenBiMzVzX1hVenpFakV3NThIald3bWdKb2pRTUpwdUFjUER1RXdqbW5IWmtNRnNhWklaVzg5Nl9Ta2U3SFI5eVRzTjhwR0dFQWFNbk8xUXRoUXVnd0NpdmgtSmJLNVV1RWF2YU42WGlScFJ5V2xheVdlUTkyN08yRHBmOHRZbG9KVnhncVZLOXJoNXBDMTByQi1ydlhRTnRKdGZFRGxVbFJpQ1gwaVY3ZkI0OF9PV0Vv?oc=5">WNBA fan favorite Kate Martin signs with team in Australia - USA Today</a></li>
+  <li><strong>Nemesis Amani Hooker</strong> (NFL, TRADE) — <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxNaExsaFJybjI5N1VRTm1sRHJxX2ZkMHdYb2ZqMk9oU3p4ZEN1b3RYdlNCaWl2WE1zbU83Z0x3WVppNGQwajlQVDNvOWdnVzNNdmRnWE5EaEZUb2o3bk50VlZYVnNWZDVWNnNPZEVCSklNVHB6MHVaeHc2QWh2R0o4MXlKVTRWd3daYU4wdQ?oc=5">Bengals Nemesis Amani Hooker Traded to AFC Contender - Yahoo Sports</a></li>
+  <li><strong>Robert Stock</strong> (MLB, SIGNING) — <a href="https://www.espn.com/mlb/story/_/id/50403894/new-york-mets-re-sign-pitcher-robert-stock-one-year-deal">Mets re-sign pitcher Robert Stock, 36, to one-year contract</a></li>
+  <li><strong>Odell Beckham</strong> (NFL, SIGNING) — <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNSFB4SEZlRE15Y2gxZW9KTkVOV0N0UmxhVmZGQlpsZWF1blNMZXcybURaVUxUeFl4VDhLbWpOdWl2d2hkTmcwZzFqQjZVQWE4d2plZTgtd29QejVROEMybnlXbl95ZllwM3UtVHEwMDFQR1ozeWRXRUVnR0FseEhaVk1NR3E3UC13SEpqcVVBaUhKVG5YVFpUVkVIQy1hZHV6N3FQdDRYQXg?oc=5">News: Signs with Minnesota's active roster - RotoWire</a></li>
+  <li><strong>Odell Beckham Jr</strong> (NFL, SIGNING) — <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPa3UzMUFqSm52Skd5a3ctQ2hXbjg4SlliU0dBYlFMT3dpVFJpSElDa2loQ1lSUlFwV3lrbE4zV1g2ai1xUjdGRzhlOFgwS2dWZ3RMNnFxenRoNDBXTlAtUGowdy1BYjd4QkhHOEhaVXhoREtfRWRxN2NFQUVrdC0ycm81dkVCNE5EaW1peWVkQVBlbWtsaU9pclN5R3NEQdIBowFBVV95cUxOVFFLUDF4WkxnZGhSVjJhUkVnSU9NWUptY3BsSjVYbVRLaTNUNU1YSDlnN09qLXlsal8xUFNNdi12Xy1pRms0Nm1FZTNXbHNqMzUxTm9UdURjMDFBaEtHeHZPUG1JRktmSXlKTUpPbmF1TDlRSGJaWWt6YXNVSWNSZlQtOVhsd3AxQWQ3VWtHUXluaHpkOGFNVWFnejdCYXdCT1ZV?oc=5">signs with Vikings' active roster - FantasyPros</a></li>
+  <li><strong>Jacob Young</strong> (MLB, SIGNING) — <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxObG1fZG9vclFIVVk2Z203QnRIMVdIdkpkWEQ0aWJlMWxCOXJUdFNoS2I3anRSekI3T3ZKcEg2Z20zS3VUbll2TUF2b3NvXzdUTE9Wa19JTkdvdjFFZ3F0YVhNYnIwSHJBZWpNS1NFcm9sN2hBTzR0eHpKQndwX1M1akJrTU1HT0pNZW1wUl9HYw?oc=5">Nationals agree to four-year extension - MLB.com</a></li>
+  <li><strong>Kader Kohou</strong> (NFL, SIGNING) — <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOZzFFTkZHcU1tTmpfcU4yX0ZndlFwWFpmSzRvYTJHaWdTVlk5N2FJdEs4bS1HUFFkQTBNOThDOXdfN1dlNEVWQXR5UkhBSzNkRmhNSkZjSC12S1ZiTU43VmZDN1JGYmtFcEMxZHl6c3RscklzTWJMZVB3dFVxeUlBcWVR0gGHAUFVX3lxTE83WjQwbnotSTF3ZFd2WGRwX2J4X0VLNmxqUVlHUGhMdm9mQnlJLW9WVnB1dlZ2QTAxcVdFY2VxdmV2SVd2QTdzbk4wTzdnTUtwOWxLRGFSbEJaZDMxZ0xSX2dBci1lMWYzM1dVMnh2VkNmM3YyUTd3MWpmTXpxcXBJQzdlb0Rvbw?oc=5">signs with Bills - FantasyPros</a></li>
+</ul>
+
+<h2>🆕 CALLUPS, DRAFT & DEBUTS</h2>
+<ul>
+  <li><strong>Bronny James</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNdU43cVhtd2xKMGt1dnVkWDZnTE12MTlIN2YtNno0bVFETkUtRmwwNnZnYTVFbkF6VU1pYnZzWlNOQkV0OTlLeWs0Q0MtcmhrZUpxQlZ1Qzd4aU5EeXNXbFktdDJJaE05YlhDSFItLTVSX3dBMURROXlnTjNlTzhlaC1STVRhZVBhUXVBRU9BUVk5ZXRkY0ZHMQ?oc=5">Lakers' Bronny James: Recalled to NBA - CBS Sports</a></li>
+  <li><strong>Chris Cenac</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxNZC1ibGY5eTRBakw3dzZFRHVEY3ZHbHNjUFNyeVpKVmVuZUM3Vm1QeWpZdVAyd2lBRktTYU1HSDgteFhxZlVRa1k4TkZzZGFacEFXakJTTVRVQWZnZ1NUM0k4dWJ2bjBkc0xRWThOX3dXRVZnaW9NYThDMWlwdHR1QnM1QjMyVVBYaWthRXpyQQ?oc=5">Celtics' Chris Cenac: Recalled to NBA - CBS Sports</a></li>
+  <li><strong>Dailyn Swain</strong> (NBA) — <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxPWWFOMktiZ0xyT25jamtmaUVycHFWYXV5Q0JjczA0Y3R1S044Q252a0lvNWpRWEY4ZWFCZ1JNRnVXamQ5T0ZkX3hjVlJfZkZZTGVfOFdhcXlyUUJQWDZWa2U0LVBDVjI2cHRXNmc3MDd6LTB3U0dsekJhX0txQkY0SWRTdHpXRGV1aW53LVZn?oc=5">Bulls' Dailyn Swain: Recalled to NBA - CBS Sports</a></li>
+</ul>
+
+<h2>💎 VALUE PICK OF THE WEEK</h2>
+<p><strong>2016 Panini Absolute Football Rook Ink Jarran Reed RC Auto /150 #21 Seahawks</strong> — <strong>$14.69</strong> (9 watchers)</p>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318840722561"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/wF8AAeSwFu5qn0Fc/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2016 Panini Absolute Football Rook Ink Jarran Reed RC Auto /150 #21 Seahawks</div><div class="nl-card__price">$14.69</div></a></div>
+
+<p>9 buyers already watching this one. Rookie card + serial-numbered, priced under most comparable comps in the active market.</p>
+
+<h2>🔦 SPOTLIGHT</h2>
+<p><strong>CeeDee Lamb</strong> (NFL)</p>
+
+<p><em>This week:</em> on a hot streak (195 receiving yds, 1 TD (DAL @ IND, Final)).</p>
+
+<h2>👀 BUYERS ARE WATCHING</h2>
+<div class="nl-cards"><a class="nl-card" href="https://www.ebay.com/itm/318802146754"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/SNMAAeSwWaNqlMtG/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">1997 Skybox Marvel Metal Universe John Elway #8 Denver Broncos NFL Football</div><div class="nl-card__price">$113.13</div></a><a class="nl-card" href="https://www.ebay.com/itm/318432294818"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTUxMlgxNTEy/z/VfgAAeSwYoFqRG6r/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2025-26 Prizm FIFA Sublime Eric Cantona #16 SSP Ultra Rare!</div><div class="nl-card__price">$140.24</div></a><a class="nl-card" href="https://www.ebay.com/itm/318463559502"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/p9oAAeSw53VqMUjI/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Select Crown Jewels Jayson Tatum #10 SSP Boston Celtics NBA</div><div class="nl-card__price">$50.15</div></a><a class="nl-card" href="https://www.ebay.com/itm/318744083437"><div class="nl-card__img" style="background-image:url('https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/75MAAeSwk7Fqgxad/$_1.JPG?set_id=8800005007')"></div><div class="nl-card__name">2024 Panini Select WWE X-Pac #37 Tiger Prizm Tiger Stripe Wrestling</div><div class="nl-card__price">$54.99</div></a></div>
+
+<h2>🏷️ SOLD THIS WEEK</h2>
+<ul>
+  <li>2024 Select Bam Adebayo Mezzanine Gold Ice /10 — <strong>$81.49</strong></li>
+  <li>2026 Topps Series 1 Roman Anthony #189 Aqua Rainbow Foil SP (RC) Rookie — <strong>$52.99</strong></li>
+  <li>2025 Prizm Draft Picks - Fearless Shedeur Sanders #F-SSS Green Pulsar (RC) /25 — <strong>$48.00</strong></li>
+  <li>2025 Pokemon Black Bolt Minccino Illustration Rare #152/086 — <strong>$42.24</strong></li>
+  <li>2025-26 Topps Chrome UCC Divine Mukasa Gold Xfractor /50 RC Man City #49 — <strong>$31.50</strong></li>
+</ul>
+
+<h2>📅 UPCOMING SPORTS EVENTS</h2>
+<ul>
+  <li><strong>2026-12-07</strong> (26d): Heisman Trophy finalists announced</li>
+</ul>
+
+<h2>🎴 UPCOMING CARD RELEASES</h2>
+<p>Big drops on the horizon — comp values for these sets tend to spike 7-14 days pre-release.</p>
+
+<ul>
+  <li><strong>2026-11-28</strong> (17d) — <strong>2026 Panini Mosaic Football No Huddle</strong>: 2026 Panini Mosaic Football No Huddle release</li>
+  <li><strong>2026-12-04</strong> (23d) — <strong>One Piece OP-09 Four Emperors</strong>: One Piece Card Game Four Emperors OP-09 Release</li>
+</ul>
+
+<h2>🎁 BUNDLE & SAVE</h2>
+<p>Buy more, save more: 10% off 2+ · 15% off 3+ · 20% off 4+.</p>
+
+<p>🔗 <a href="https://www.ebay.com/usr/tigerhawk-515">Browse the store</a></p>
+  <div class="footer">
+    You're reading the full edition of the Flyover Heat Weekly.
+    <br>Follow the store on eBay to receive the next one:
+    <a href="https://www.ebay.com/usr/tigerhawk-515">www.ebay.com/usr/tigerhawk-515</a>
+  </div>
+</body>
+</html>
